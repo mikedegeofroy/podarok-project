@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../lib/context';
 
 import toast from 'react-hot-toast';
-import Link from 'next/link';
 
 export default function Login(props){
     const { user, parentName, childName, childAge } = useContext(UserContext);
@@ -18,31 +17,10 @@ export default function Login(props){
         <main>
             {user ? <SignOutButton />  :
             <>
-                <LoginForm/>
-                <SignInButton />
-                <Link href="/ressetpasswd">Forogt Password?</Link>
+                <RegisterForm/>
             </>
             }
         </main>
-    )
-}
-
-function SignInButton() {
-
-    const signInWithGoogle = async () => {
-        await auth.signInWithPopup(googleAuthProvider);
-        toast.success(`Signed In`)
-    }
-
-    return(
-        <div>   
-            <button className="btn-google" onClick={signInWithGoogle}>
-                Sign in with Google
-            </button>
-            {/* <button className="btn-google" onClick={UPCreateTest}>
-                Create U and P
-            </button> */}
-        </div>
     )
 }
 
@@ -50,20 +28,7 @@ function SignOutButton(){
     return <button onClick={() => {auth.signOut(); toast.success(`Signed Out`)}}>Log Out</button>;
 }
 
-// function UsernameForm() {
-//     return null;
-// }
-
-// function UPCreateTest() {
-//     auth.createUserWithEmailAndPassword("michadegeofroy@gmail.com", "Formentera2020").then( () => {
-//         toast.success("Created account")
-//     }).catch((error)=>{
-//         toast.error("Oops i did it again!")
-//     })
-// }
-
-
-function LoginForm(){
+function RegisterForm(){
 
     const [formEmail, setFormEmail] = useState('');
     const [formPassword, setFormPassword] = useState('');
@@ -79,13 +44,11 @@ function LoginForm(){
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        auth.signInWithEmailAndPassword(formEmail, formPassword)
-        .then((userCredential) => {
-            toast.success("Logged In")
+        auth.createUserWithEmailAndPassword(formEmail, formPassword).then( () => {
+            toast.success("Created account")
+        }).catch((error)=>{
+            toast.error("Oops i did it again!")
         })
-        .catch((error) => {
-            console.log(error)
-        });
     };
 
     return(
@@ -98,7 +61,7 @@ function LoginForm(){
                 <br />
                 <br />
                 <button type="submit">
-                    Login
+                    Register
                 </button>
             </form>
         </section>
