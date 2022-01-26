@@ -5,7 +5,7 @@ import { UserContext } from '../lib/context';
 import toast from 'react-hot-toast';
 
 export default function Login(props){
-    const { user, parentName, childName, childAge } = useContext(UserContext);
+    const { user, childName, childAge, childGender } = useContext(UserContext);
 
     useEffect( () => {
         if(user){

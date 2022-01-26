@@ -3,27 +3,30 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../lib/context';
 
 import toast from 'react-hot-toast';
+import Box from '../components/box';
 import Link from 'next/link';
 
 export default function Login(props){
-    const { user, parentName, childName, childAge } = useContext(UserContext);
+    const {user, childName, childAge, childGender} = useContext(UserContext);
 
     useEffect( () => {
         if(user){
-            console.log(user.email)
+            toast.success('Logged in')
         }
     }, [user])
 
     return(
-        <main>
-            {user ? <SignOutButton />  :
-            <>
-                <LoginForm/>
-                <SignInButton />
-                <Link href="/ressetpasswd">Forogt Password?</Link>
-            </>
-            }
-        </main>
+        <div className="grid place-items-center h-screen">
+            <Box>
+                {user ? <SignOutButton />  :
+                <div className="w-52">
+                    <LoginForm/>
+                    <SignInButton />
+                    <Link href="/ressetpasswd"><a className='text-gray-600' >Forgot Password?</a></Link>
+                </div>
+                }
+            </Box>
+        </div>
     )
 }
 
@@ -31,12 +34,11 @@ function SignInButton() {
 
     const signInWithGoogle = async () => {
         await auth.signInWithPopup(googleAuthProvider);
-        toast.success(`Signed In`)
     }
 
     return(
         <div>   
-            <button className="btn-google" onClick={signInWithGoogle}>
+            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded container my-4' onClick={signInWithGoogle}>
                 Sign in with Google
             </button>
             {/* <button className="btn-google" onClick={UPCreateTest}>
@@ -92,12 +94,12 @@ function LoginForm(){
         <section>
             <form onSubmit={onSubmit}>
                 <h3>Email</h3>
-                <input name="username" onChange={onChangeEmail}/>
+                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6' name="username" onChange={onChangeEmail}/>
                 <h3>Password</h3>
-                <input name="password" onChange={onChangePassword}/>
+                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' name="password" onChange={onChangePassword}/>
                 <br />
                 <br />
-                <button type="submit">
+                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded container mx-auto my-4' type="submit">
                     Login
                 </button>
             </form>
