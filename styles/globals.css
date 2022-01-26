@@ -4,7 +4,7 @@
 
 @layer components {
     main {
-        @apply min-h-screen bg-white
+        @apply min-h-screen
     }
 
     html,main {
