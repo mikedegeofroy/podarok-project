@@ -14,8 +14,8 @@ export default function Home() {
         </video>
       </div>
       <div>
-        <Link href="/setup"><a>Send</a></Link>
-        <Link href="/setup"><a>Recieve</a></Link>
+        <Link href="/setup"><a className="p-3">Send</a></Link>
+        <Link href="/setup"><a className="p-3">Recieve</a></Link>
       </div>
       {/* Here I should have two buttons, one to recive, another one to send */}
       {/* <Link href="/setup"><a className="text-black">Recieve</a></Link> */}
