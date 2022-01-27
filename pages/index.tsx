@@ -11,7 +11,7 @@ export default function Home() {
       <div className="grid place-items-center h-min-screen">
       {/* <button onClick={() => {toast.success("Clicked")}}>Click Me!</button> */}
       <div className="flex flex-row justify-center pt-16">
-        <video className="-z-10 lg:w-1/2 md:w-2/3 sm:w-full" playsInline autoPlay muted loop preload="true">         
+        <video className="-z-10 lg:w-1/2 md:w-2/3 sm:w-full" playsInline autoPlay muted loop>         
             <source src="/background-video.mp4" type="video/mp4"/>       
         </video>
       </div>
