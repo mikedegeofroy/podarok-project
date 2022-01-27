@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import Box from '../components/box';
 import Link from 'next/link';
 
-export default function Login(props){
+export default function Login(){
     const {user, childName, childAge, childGender} = useContext(UserContext);
 
     useEffect( () => {
