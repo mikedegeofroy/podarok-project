@@ -1,4 +1,5 @@
 import { auth, googleAuthProvider } from '../lib/firebase';
+import { sendPasswordResetEmail } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { UserContext } from '../lib/context';
 
@@ -17,7 +18,7 @@ export default function ForgotPassword(){
 
         e.preventDefault();
 
-        auth.sendPasswordResetEmail(formEmail).then( (res) => {
+        sendPasswordResetEmail(auth, formEmail).then( (res) => {
             console.log(res)
             toast.success('Email Sent!')
         }).catch( (error) => {

@@ -1,4 +1,5 @@
-import { auth, googleAuthProvider } from '../lib/firebase';
+import { auth } from '../lib/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../lib/context';
 
@@ -44,7 +45,7 @@ function RegisterForm(){
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        auth.createUserWithEmailAndPassword(formEmail, formPassword).then( () => {
+        createUserWithEmailAndPassword(auth, formEmail, formPassword).then( () => {
             toast.success("Created account")
         }).catch((error)=>{
             toast.error("Oops i did it again!")

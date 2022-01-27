@@ -33,16 +33,16 @@ export default function Setup(){
             <div className="grid place-items-center h-screen">
                 <Box>
                     <form className="w-52" onSubmit={onSubmit}>
-                        <h3>Parent's Name</h3>
+                        <h3>Parent&apos;s Name</h3>
                         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6" id="cockDealer" type="text" name="parentsName" />
-                        <h3>Child's Name</h3>
+                        <h3>Child&apos;s Name</h3>
                         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6" type="text" name="email" />
                         <h3>Child Gender</h3>
                         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6" type="text" name="email" />
                         <h3>Child Age</h3>
                         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6" type="text" name="email" />
                         <br />
-                        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded container mx-auto my-4' type="submit">
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded container mx-auto my-4" type="submit">
                             Submit
                         </button>
                     </form>

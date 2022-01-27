@@ -1,5 +1,6 @@
-import { auth, googleAuthProvider } from '../lib/firebase';
-import { useContext, useEffect, useState } from 'react';
+import { auth, googleAuthProvider, firestore } from '../lib/firebase';
+import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
+import { SetStateAction, useContext, useEffect, useState } from 'react';
 import { UserContext } from '../lib/context';
 
 import toast from 'react-hot-toast';
@@ -33,7 +34,7 @@ export default function Login(){
 function SignInButton() {
 
     const signInWithGoogle = async () => {
-        await auth.signInWithPopup(googleAuthProvider);
+        await signInWithPopup(auth, googleAuthProvider);
     }
 
     return(
@@ -70,22 +71,22 @@ function LoginForm(){
     const [formEmail, setFormEmail] = useState('');
     const [formPassword, setFormPassword] = useState('');
 
-    const onChangeEmail = (e) => {
+    const onChangeEmail = (e: { target: { value: SetStateAction<string>; }; }) => {
         setFormEmail(e.target.value)
     }
 
-    const onChangePassword = (e) => {
+    const onChangePassword = (e: { target: { value: SetStateAction<string>; }; }) => {
         setFormPassword(e.target.value)
     }
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
-        auth.signInWithEmailAndPassword(formEmail, formPassword)
-        .then((userCredential) => {
+        signInWithEmailAndPassword(auth, formEmail, formPassword)
+        .then((userCredential: any) => {
             toast.success("Logged In")
         })
-        .catch((error) => {
+        .catch((error: any) => {
             console.log(error)
         });
     };
