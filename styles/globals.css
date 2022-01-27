@@ -6,9 +6,15 @@
     main {
         @apply min-h-screen
     }
-
+    
     html,main {
         font-family: 'Amatic SC', cursive;
         font-size: 1.2em;
+    }
+
+    video {
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
     }
 }

@@ -23,8 +23,9 @@ export default function Layout({children}){
                 {user ? <p>{user.email}</p> : <Link href="/login">Log in</Link>}
             </div>
             <main>{children}</main>
-            <footer>
-                <p>Some Footer</p>
+            <footer className="p-4">
+                <Image src={'/fox.png'} height={'100px'} width={'100px'}></Image>
+                <h1 className="float-right">Special thanks to @polunovsskaya for the artwork</h1>
             </footer>
         </>
     )
