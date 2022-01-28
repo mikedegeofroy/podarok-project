@@ -16,7 +16,7 @@ export default function Layout({children}){
                 <link rel="preconnect" href="https://fonts.gstatic.com"/>
                 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet"/>
             </Head>
-            <div className="flex w-screen justify-between p-4 fixed top-0 h-16 bg-white">
+            <div className="z-10 flex w-screen justify-between p-4 fixed top-0 h-16 bg-white">
                 <div className="h-auto w-40 cursor-pointer">
                     <Link href="/"><Image src="/logo.png" width="4755px" height="853px" layout='responsive'></Image></Link>
                 </div>
