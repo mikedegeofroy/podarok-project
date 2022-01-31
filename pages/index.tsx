@@ -1,14 +1,13 @@
 import Link from 'next/link'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
-import Box from '../components/box'
 
 
 export default function Home() {
 
   return (
     <div>
-      <div className="grid place-items-center h-min-screen">
+      <div className="grid place-items-center">
         {/* <button onClick={() => {toast.success("Clicked")}}>Click Me!</button> */}
         <div className="flex flex-row justify-center pt-16">
           <video controls={false} playsInline autoPlay muted loop className="lg:w-1/2 md:w-2/3 sm:w-full">

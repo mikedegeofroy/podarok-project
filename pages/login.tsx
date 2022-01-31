@@ -1,24 +1,25 @@
-import { auth, googleAuthProvider, firestore } from '../lib/firebase';
+import { auth, googleAuthProvider } from '../lib/firebase';
 import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, writeBatch, getFirestore } from 'firebase/firestore'
 import { SetStateAction, useContext, useEffect, useState } from 'react';
 import { UserContext } from '../lib/context';
+import { useRouter } from 'next/router';
 
 import toast from 'react-hot-toast';
-import Box from '../components/box';
 import Link from 'next/link';
 
 export default function Login(){
-    const {user, childName, childAge, childGender} = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
-    useEffect( () => {
-        if(user){
-            toast.success('Logged in')
-        }
-    }, [user])
+    // useEffect( () => {
+    //     if(user){
+    //         toast.success('Logged in')
+    //     }
+    // }, [user])
 
     return(
         <div className="grid place-items-center h-screen">
-            <Box>
+            <div>
                 {user ? <SignOutButton />  :
                 <div className="w-52">
                     <LoginForm/>
@@ -26,15 +27,28 @@ export default function Login(){
                     <Link href="/ressetpasswd"><a className='text-gray-600' >Forgot Password?</a></Link>
                 </div>
                 }
-            </Box>
+            </div>
         </div>
     )
 }
 
 function SignInButton() {
+    const router = useRouter()
 
     const signInWithGoogle = async () => {
-        await signInWithPopup(auth, googleAuthProvider);
+        await signInWithPopup(auth, googleAuthProvider).then( async (user) => {
+            const userDoc = doc(getFirestore(), 'users', user.user.uid)
+
+            const batch = writeBatch(getFirestore());
+
+            batch.set(userDoc, { email: user.user.email });
+
+            await batch.commit();
+
+            toast.success('Logged In')
+
+            router.push('/profile')
+        });
     }
 
     return(
@@ -50,12 +64,9 @@ function SignInButton() {
 }
 
 function SignOutButton(){
-    return <button onClick={() => {auth.signOut(); toast.success(`Signed Out`)}}>Log Out</button>;
+    return <button onClick={() => {auth.signOut(); toast.success('Logged Out')}}>You are already logged in, do you want to Log Out?</button>;
 }
 
-// function UsernameForm() {
-//     return null;
-// }
 
 // function UPCreateTest() {
 //     auth.createUserWithEmailAndPassword("michadegeofroy@gmail.com", "Formentera2020").then( () => {
@@ -67,6 +78,7 @@ function SignOutButton(){
 
 
 function LoginForm(){
+    const router = useRouter()
 
     const [formEmail, setFormEmail] = useState('');
     const [formPassword, setFormPassword] = useState('');
@@ -83,8 +95,20 @@ function LoginForm(){
         e.preventDefault();
 
         signInWithEmailAndPassword(auth, formEmail, formPassword)
-        .then((userCredential: any) => {
+        .then( async (user) => {
+            const userDoc = doc(getFirestore(), 'users', user.user.uid)
+
+            const batch = writeBatch(getFirestore());
+
+            batch.set(userDoc, { email: user.user.email });
+
+            await batch.commit();
+
             toast.success("Logged In")
+
+            console.log('yeah')
+
+            router.push('/profile')
         })
         .catch((error: any) => {
             console.log(error)

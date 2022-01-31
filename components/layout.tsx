@@ -20,7 +20,7 @@ export default function Layout({children}){
                 <div className="h-auto w-40 cursor-pointer">
                     <Link href="/"><Image src="/logo.png" width="4755px" height="853px" layout='responsive'></Image></Link>
                 </div>
-                {user ? <p>{user.email}</p> : <Link href="/login">Log in</Link>}
+                {user ? <Link href="/profile">{user.email}</Link> : <Link href="/login">Log in</Link>}
             </div>
             <main>{children}</main>
             <footer className="p-4">
