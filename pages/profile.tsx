@@ -47,7 +47,7 @@ function ProfileData(){
 function childrenList(children){
     return children ? children.map(({ name, gender }) => { 
         return(
-            <div className="h-full w-full bg-blue-300">{name}</div>
+            <div key={name} className="h-full w-full bg-blue-300">{name}</div>
         )
     }) : 
     <h1>Fuck</h1>
