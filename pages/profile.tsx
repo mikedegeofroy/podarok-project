@@ -45,9 +45,9 @@ function ProfileData(){
 }
 
 function childrenList(children){
-    return children ? children.map(({ name, gender }) => { 
+    return children ? children.map(({ name, gender }, index) => { 
         return(
-            <div key={name} className="h-full w-full bg-blue-300">{name}</div>
+            <div key={index} className="h-full w-full bg-blue-300">{name}</div>
         )
     }) : 
     <h1>Fuck</h1>
