@@ -47,7 +47,7 @@ function ProfileData(){
 }
 
 function ChildrenList(data){
-    let children = data.children
+    let children = data.childrenList
 
     return children ? <>
     {children.map(({ name, gender, slug }, index) => { 
