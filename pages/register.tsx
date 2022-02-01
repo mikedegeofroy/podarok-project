@@ -7,13 +7,13 @@ import { UserContext } from '../lib/context';
 import toast from 'react-hot-toast';
 
 export default function Login(props){
-    const { user, childName, childAge, childGender } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
-    useEffect( () => {
-        if(user){
-            console.log(user.email)
-        }
-    }, [user])
+    // useEffect( () => {
+    //     if(user){
+    //         console.log(user.email)
+    //     }
+    // }, [user])
 
     return(
         <div className='pt-16'>

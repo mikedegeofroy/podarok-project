@@ -11,12 +11,6 @@ import Link from 'next/link';
 export default function Login(){
     const { user } = useContext(UserContext);
 
-    // useEffect( () => {
-    //     if(user){
-    //         toast.success('Logged in')
-    //     }
-    // }, [user])
-
     return(
         <div className="grid place-items-center h-screen">
             <div>
@@ -56,9 +50,6 @@ function SignInButton() {
             <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded container my-4' onClick={signInWithGoogle}>
                 Sign in with Google
             </button>
-            {/* <button className="btn-google" onClick={UPCreateTest}>
-                Create U and P
-            </button> */}
         </div>
     )
 }
@@ -66,15 +57,6 @@ function SignInButton() {
 function SignOutButton(){
     return <button onClick={() => {auth.signOut(); toast.success('Logged Out')}}>You are already logged in, do you want to Log Out?</button>;
 }
-
-
-// function UPCreateTest() {
-//     auth.createUserWithEmailAndPassword("michadegeofroy@gmail.com", "Formentera2020").then( () => {
-//         toast.success("Created account")
-//     }).catch((error)=>{
-//         toast.error("Oops i did it again!")
-//     })
-// }
 
 
 function LoginForm(){
