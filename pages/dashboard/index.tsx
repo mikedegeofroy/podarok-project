@@ -56,7 +56,7 @@ function ChildrenList(data){
             color = "bg-pink-50"
         }
         return(
-            <Link href={`/dashboard/${slug}`}><div key={index} className={`h-full w-full rounded-lg p-4 ${color}`}>{name}</div></Link>
+            <Link key={index} href={`/dashboard/${slug}`}><div className={`h-full w-full rounded-lg p-4 ${color}`}>{name}</div></Link>
         )
     })}
     {children.length < 4 && 
