@@ -47,7 +47,7 @@ function SignInButton() {
 
             toast.success('Logged In')
 
-            router.push('/profile')
+            router.push('/dashboard')
         });
     }
 
@@ -108,7 +108,7 @@ function LoginForm(){
 
             console.log('yeah')
 
-            router.push('/profile')
+            router.push('/dashboard')
         })
         .catch((error: any) => {
             console.log(error)

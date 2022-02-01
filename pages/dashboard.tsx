@@ -38,17 +38,29 @@ function ProfileData(){
     console.log(children, user)
 
     return(
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-5">
-            {childrenList(children)}
+        <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+            <ChildrenList children={children}/>
         </div>
     )
 }
 
-function childrenList(children){
-    return children ? children.map(({ name, gender }, index) => { 
+function ChildrenList(data){
+    let children = data.children
+
+    return children ? <>
+    {children.map(({ name, gender }, index) => { 
+        let color = "bg-blue-50"
+        if(gender == "F"){
+            color = "bg-pink-50"
+        }
         return(
-            <div key={index} className="h-full w-full bg-blue-300">{name}</div>
+            <div key={index} className={`h-full w-full rounded-lg p-4 ${color}`}>{name}</div>
         )
-    }) : 
-    <h1>Fuck</h1>
+    })}
+    {children.length < 4 && 
+        <div key="3" className={`h-full w-full rounded-lg p-4 bg-slate-50`}>+</div>
+    }
+    
+    </> : 
+    <h1>Loading..</h1>
 }
