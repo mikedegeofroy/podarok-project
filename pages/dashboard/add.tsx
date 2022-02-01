@@ -27,7 +27,7 @@ function AddChild(){
 
     if(children[0]){
         if(children[0].length > 4){
-            return <>Sorry, you can&apos;'t add more children.</>
+            return <>Sorry, you can&apos;t add more children.</>
         }
     }
 

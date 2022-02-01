@@ -33,15 +33,15 @@ function ProfileData(){
     let ref = collection(getFirestore(), 'users', auth.currentUser.uid, 'children')
     const childrenQuery = query(ref)
     const [querySnapshot] = useCollection(childrenQuery);
-    const children = querySnapshot?.docs.map((doc) => doc.data());
+    const childrenList = querySnapshot?.docs.map((doc) => doc.data());
 
     const [user] = useDocumentDataOnce(userDoc)
 
-    console.log(children, user)
+    console.log(childrenList, user)
 
     return(
         <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-            <ChildrenList children={children}/>
+            <ChildrenList childrenList={childrenList}/>
         </div>
     )
 }
