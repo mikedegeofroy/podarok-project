@@ -47,7 +47,7 @@ function SignInButton() {
 
     return(
         <div>   
-            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded container my-4' onClick={signInWithGoogle}>
+            <button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container my-4' onClick={signInWithGoogle}>
                 Sign in with Google
             </button>
         </div>
@@ -106,7 +106,7 @@ function LoginForm(){
                 <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' name="password" onChange={onChangePassword}/>
                 <br />
                 <br />
-                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded container mx-auto my-4' type="submit">
+                <button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4' type="submit">
                     Login
                 </button>
             </form>

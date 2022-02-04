@@ -1,18 +1,17 @@
 import { auth } from '../../lib/firebase'
 import AuthCheck from '../../components/authcheck'
 import { useDocumentDataOnce, useCollection } from 'react-firebase-hooks/firestore';
-import { getFirestore, doc, collection, query, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, collection, query } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 
 import toast from 'react-hot-toast';
-import kebabCase from 'lodash.kebabcase'
 import Link from 'next/link';
 
 export default function UserProfile(){
 
     return(
         <AuthCheck>
-            <div className="pt-16">
+            <div className="mx-16 pt-16">
                 <ProfileData/>
                 <SignOutButton/>
             </div>
@@ -23,7 +22,7 @@ export default function UserProfile(){
 
 function SignOutButton(){
     const router = useRouter()
-    return <button onClick={() => {auth.signOut().then( () => {router.push('/login'); toast.success('Logged Out')})}}>Log Out</button>;
+    return <button className='bg-black hover:bg-slate-900 text-white font-bold rounded container w-auto py-2 px-4' onClick={() => {auth.signOut().then( () => {router.push('/login'); toast.success('Logged Out')})}}>Log Out</button>;
 }
 
 function ProfileData(){
@@ -56,52 +55,13 @@ function ChildrenList(data){
             color = "bg-pink-50"
         }
         return(
-            <Link key={index} href={`/dashboard/${slug}`}><div className={`h-full w-full rounded-lg p-4 ${color}`}>{name}</div></Link>
+            <Link key={index} href={`/dashboard/${slug}`}><div className={`flex justify-center align-middle h-full w-full rounded-lg p-4 ${color}`}>{name}</div></Link>
         )
     })}
     {children.length < 4 && 
-        <AddChild/>
+        <Link href="/dashboard/add"><div key="3" className={`flex justify-center align-middle h-full w-full rounded-lg p-4 bg-slate-50`}>+</div></Link>
     }
     
     </> : 
     <h1>Loading..</h1>
-}
-
-function AddChild(){
-    // const userDoc = doc(getFirestore(), 'users', auth.currentUser.uid, 'children')
-
-    async function onSubmit() {
-        let name = "Anita Bonita"
-        let age = 10
-        let gender = "F"
-        let slug = encodeURI(kebabCase(name))
-
-        const uid = auth.currentUser.uid;
-        const ref = doc(getFirestore(), 'users', uid, 'children', slug);
-    
-        const data = {
-            name,
-            age,
-            gender,
-            slug
-        };
-    
-        await setDoc(ref, data);
-
-        console.log('done')
-    }
-
-    // const batch = writeBatch(getFirestore());
-
-    // batch.set(userDoc, { email: user.user.email });
-
-    // await batch.commit();
-
-    // <div onClick={() => { addChild() }} key="3" className={`h-full w-full rounded-lg p-4 bg-slate-50`}>+</div>
-
-    return(
-        // <form onSubmit={onSubmit}>
-        <div onClick={() => { onSubmit() }} key="3" className={`h-full w-full rounded-lg p-4 bg-slate-50`}>+</div>
-        // </form>
-    )
 }
