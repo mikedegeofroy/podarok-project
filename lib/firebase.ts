@@ -5,7 +5,7 @@
 
 import { initializeApp, getApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore, doc, getDoc, collection } from "firebase/firestore";
+import { getFirestore, doc, getDoc, collection, where, limit, query, getDocs } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {

@@ -5,13 +5,15 @@ import { getFirestore, doc, collection, query } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 
 import toast from 'react-hot-toast';
+import Image from 'next/image'
 import Link from 'next/link';
 
 export default function UserProfile(){
 
     return(
         <AuthCheck>
-            <div className="mx-16 pt-16">
+            <div className="sm:mx-16 pt-16 mx-8">
+                <h1 className="mb-6 text-2xl">Children</h1>
                 <ProfileData/>
                 <SignOutButton/>
             </div>
@@ -39,7 +41,7 @@ function ProfileData(){
     console.log(childrenList, user)
 
     return(
-        <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        <div className="grid gap-4 grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 mb-6">
             <ChildrenList childrenList={childrenList}/>
         </div>
     )
@@ -49,17 +51,19 @@ function ChildrenList(data){
     let children = data.childrenList
 
     return children ? <>
-    {children.map(({ name, gender, slug }, index) => { 
+    {children.map(({ name, gender, slug, status }, index) => { 
         let color = "bg-blue-50"
+        let source = "/boy.png"
         if(gender == "F"){
             color = "bg-pink-50"
+            source = "/girl.png"
         }
         return(
-            <Link key={index} href={`/dashboard/${slug}`}><div className={`flex justify-center align-middle h-full w-full rounded-lg p-4 ${color}`}>{name}</div></Link>
+            <Link key={index} href={`/dashboard/${slug}`}><div className={`text-center h-full w-full rounded-lg p-4 ${color}`}><h2 className='text-3xl'>{name}</h2> <Image src={source} height={278} width={130}/><div>{status}</div></div></Link>
         )
     })}
     {children.length < 4 && 
-        <Link href="/dashboard/add"><div key="3" className={`flex justify-center align-middle h-full w-full rounded-lg p-4 bg-slate-50`}>+</div></Link>
+        <Link href="/dashboard/add"><div key="3" className={`flex justify-center align-middle h-full w-full rounded-lg p-4 bg-slate-50 text-2xl`}>+</div></Link>
     }
     
     </> : 

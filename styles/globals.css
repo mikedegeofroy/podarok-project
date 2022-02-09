@@ -6,15 +6,32 @@
     main {
         @apply min-h-screen
     }
+
+    html {
+        overflow: scroll;
+        overflow-x: hidden;
+    }
     
     html,main {
         font-family: 'Amatic SC', cursive;
         font-size: 1.2em;
     }
 
+    ::-webkit-scrollbar {
+        width: 0; 
+        background: transparent;
+    }
+
     video {
         -webkit-mask-image: -webkit-radial-gradient(white, black);
         -webkit-backface-visibility: hidden;
         -moz-backface-visibility: hidden;
+    }
+
+    input[type="date"] {
+        display:block;
+        -webkit-appearance: textfield;
+        -moz-appearance: textfield;
+        min-height: 1.2em;
     }
 }

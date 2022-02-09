@@ -1,11 +1,12 @@
 import { auth } from "../../lib/firebase"
 import AuthCheck from "../../components/authcheck";
 import { getFirestore, doc, collection, query, setDoc } from 'firebase/firestore';
-import { useCollection, useCollectionData, useDocumentDataOnce } from "react-firebase-hooks/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
+import toast from "react-hot-toast";
 import kebabCase from "lodash.kebabcase"
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 export default function UserProfile(){
@@ -32,8 +33,8 @@ function AddChild(){
     const children = useCollectionData(childrenQuery);
 
     if(children[0]){
-        if(children[0].length > 4){
-            return <>Sorry, you can&apos;t add more children.</>
+        if(children[0].length >= 4){
+            return <div className="grid place-items-center h-screen">Sorry, you can&apos;t add more children.</div>
         }
     }
 
@@ -44,6 +45,7 @@ function AddChild(){
         const name = e.target[0].value
         const birthday = e.target[1].value
         const slug = encodeURI(kebabCase(name))
+        const status = "avaibable"
     
         const uid = auth.currentUser.uid;
         const ref = doc(getFirestore(), 'users', uid, 'children', slug);
@@ -52,14 +54,15 @@ function AddChild(){
             name,
             birthday,
             gender,
-            slug
+            slug,
+            status
         };
     
         await setDoc(ref, data);
-    
-        console.log('done')
 
-        router.push("/dashboard")
+        router.push("/dashboard").then( () => {
+            toast.success("Child Added")
+        })
     }
 
     return(
@@ -71,7 +74,7 @@ function AddChild(){
                         <h3>Name</h3>
                         <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6' name="username"/>
                         <h3>Gender</h3>
-                        <div className="flex flex-row">
+                        <div className="flex flex-row mb-6">
                             <div onClick={() => {setGender('M')}} className={`${gender == "M" ? "bg-slate-100" : "" } px-4 flex justify-center align-middle border shadow rounded p-2 mr-4 cursor-pointer`}>
                                 M
                             </div>
@@ -79,7 +82,7 @@ function AddChild(){
                                 F
                             </div>
                         </div>
-                        <h3>Age</h3>
+                        <h3>Birthday</h3>
                         <input className='shadow appearance-none border rounded w-full py-2 px-3 mb-5 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' type="date" min="2006-01-01" max="2013-01-01" id="birthday" name="birthday"></input>
                         {/* <input className='shadow appearance-none border rounded w-full py-2 px-3 mb-5 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' name="password"/> */}
                         <button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4' type="submit">

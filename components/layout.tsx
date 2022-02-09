@@ -10,15 +10,9 @@ export default function Layout({children}){
 
     return(
         <>
-            <Head>
-                <title>The Podarok Project</title>
-                <link rel="preconnect" href="https://fonts.googleapis.com"/>
-                <link rel="preconnect" href="https://fonts.gstatic.com"/>
-                <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet"/>
-            </Head>
             <div className="z-10 flex w-screen justify-between p-4 fixed top-0 h-16 bg-white">
                 <div className="h-auto w-40 cursor-pointer">
-                    <Link href="/"><Image src="/logo.png" width="4755px" height="853px" layout='responsive'></Image></Link>
+                    <Link href="/"><Image priority src="/logo.png" width="4755px" height="853px" layout='responsive'></Image></Link>
                 </div>
                 {user ? <Link href="/dashboard">{user.email}</Link> : <Link href="/login">Log in</Link>}
             </div>
