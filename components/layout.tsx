@@ -6,7 +6,7 @@ import { UserContext } from '../lib/context';
 
 
 export default function Layout({children}){
-    const {user, childName, childAge, childGender} = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     return(
         <>
@@ -18,8 +18,15 @@ export default function Layout({children}){
             </div>
             <main>{children}</main>
             <footer className="p-4">
-                <Image src={'/fox.png'} height={'100px'} width={'100px'}></Image>
-                <h1 className="float-right">Special thanks to @polunovsskaya for the artwork</h1>
+                <div className="float-left">
+                    <Image src={'/fox.png'} height={'80px'} width={'80px'}/>
+                </div>
+                <div className="float-right">
+                    <h1 className="text-xl">In partnership with</h1>
+                    <div className="float-right">
+                        <Image src={'/ozon.png'} height={'30px'} width={'130px'}/>
+                    </div>
+                </div>
             </footer>
         </>
     )

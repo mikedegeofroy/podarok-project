@@ -1,9 +1,17 @@
 import Link from 'next/link'
-import { useEffect } from 'react'
-import toast from 'react-hot-toast'
+import { useContext } from 'react'
+import { UserContext } from '../lib/context'
 
 
 export default function Home() {
+
+  const { user } = useContext(UserContext)
+
+  let redirect = "/login"
+
+  if(user){
+   redirect = "/dashboard"
+  }
 
   return (
     <div>
@@ -15,8 +23,8 @@ export default function Home() {
           </video>
         </div>
         <div>
-          <Link href="/setup"><a className="p-3">Send</a></Link>
-          <Link href="/setup"><a className="p-3">Recieve</a></Link>
+          <Link href={redirect}><a className="p-2 m-5">Wish a present</a></Link>
+          <Link href="/"><a className="p-2 m-5">Send a present</a></Link>
         </div>
         {/* Here I should have two buttons, one to recive, another one to send */}
         {/* <Link href="/setup"><a className="text-black">Recieve</a></Link> */}

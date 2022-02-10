@@ -53,13 +53,14 @@ function ChildrenList(data){
     return children ? <>
     {children.map(({ name, gender, slug, status }, index) => { 
         let color = "bg-blue-50"
-        let source = "/boy.png"
-        if(gender == "F"){
-            color = "bg-pink-50"
-            source = "/girl.png"
-        }
+        // let source = "/boy.png"
+        // if(gender == "F"){
+        //     color = "bg-pink-50"
+        //     source = "/girl.png"
+        // }
+        // You have to add <Image src={source} height={278} width={130}/> to activate this
         return(
-            <Link key={index} href={`/dashboard/${slug}`}><div className={`text-center h-full w-full rounded-lg p-4 ${color}`}><h2 className='text-3xl'>{name}</h2> <Image src={source} height={278} width={130}/><div>{status}</div></div></Link>
+            <Link key={index} href={`/dashboard/${slug}`}><div className={`text-center h-full w-full rounded-lg p-4 ${color}`}><h2 className='text-3xl'>{name}</h2><div>{status}</div></div></Link>
         )
     })}
     {children.length < 4 && 

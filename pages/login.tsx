@@ -17,7 +17,12 @@ export default function Login(){
                 {user ? <SignOutButton />  :
                 <div className="w-52">
                     <LoginForm/>
-                    <SignInButton />
+                    <SignInWithGoogleButton />
+                    <SignInWithVkButton />
+                    {/* <p>Not a user? <Link href="/register"><a className='text-gray-600' >Register</a></Link></p> */}
+                    <Link href="/register"><button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4'>
+                    Register
+                    </button></Link>
                     <Link href="/ressetpasswd"><a className='text-gray-600' >Forgot Password?</a></Link>
                 </div>
                 }
@@ -26,7 +31,7 @@ export default function Login(){
     )
 }
 
-function SignInButton() {
+function SignInWithGoogleButton() {
     const router = useRouter()
 
     const signInWithGoogle = async () => {
@@ -109,5 +114,32 @@ function LoginForm(){
                 </button>
             </form>
         </section>
+    )
+}
+
+function SignInWithVkButton(){
+
+    const router = useRouter();
+
+    const vkConfig = {
+        appId: "8075392",
+        perms: "4194304",
+        redirectURI: "http://127.0.0.1:3000/vk",
+        version: "5.131"
+    };
+
+    return(
+        <button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4' onClick={() => {
+            router.push({
+                pathname: 'https://oauth.vk.com/authorize',
+                query: {
+                    client_id: vkConfig.appId,
+                    scope: vkConfig.perms,
+                    redirect_uri: vkConfig.redirectURI,
+                    response_type: "code",
+                    v: vkConfig.version
+                }
+            })
+        }}>Sign in with VK</button>
     )
 }

@@ -16,7 +16,7 @@ export default function Login(props){
     // }, [user])
 
     return(
-        <div className='pt-16'>
+        <div className="grid place-items-center absolute w-screen h-screen top-0 left-0 bg-white">
             {user ? <SignOutButton />  :
             <>
                 <RegisterForm/>
@@ -42,8 +42,8 @@ function SignInButton() {
 
     return(
         <div>   
-            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded container my-4' onClick={signInWithGoogle}>
-                Sign in with Google
+            <button className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-full py-2 my-4 px-4" onClick={signInWithGoogle}>
+                Register with Google
             </button>
             {/* <button className="btn-google" onClick={UPCreateTest}>
                 Create U and P
@@ -84,7 +84,7 @@ function RegisterForm(){
 
             toast.success("Created account")
         }).catch((error)=>{
-            toast.error("Oops i did it again!")
+            toast.error("Error")
         })
     };
 
@@ -95,7 +95,7 @@ function RegisterForm(){
                 <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-6" name="username" onChange={onChangeEmail}/>
                 <h3>Password</h3>
                 <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-6" name="password" onChange={onChangePassword}/>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded container mx-auto my-4" type="submit">
+                <button className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-full py-2 my-4 px-4" type="submit">
                     Register
                 </button>
                 <SignInButton/>
