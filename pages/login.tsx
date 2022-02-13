@@ -36,14 +36,6 @@ function SignInWithGoogleButton() {
 
     const signInWithGoogle = async () => {
         await signInWithPopup(auth, googleAuthProvider).then( async (user) => {
-            const userDoc = doc(getFirestore(), 'users', user.user.uid)
-
-            const batch = writeBatch(getFirestore());
-
-            batch.set(userDoc, { email: user.user.email });
-
-            await batch.commit();
-
             toast.success('Logged In')
 
             router.push('/dashboard')
@@ -83,19 +75,11 @@ function LoginForm(){
 
         signInWithEmailAndPassword(auth, formEmail, formPassword)
         .then( async (user) => {
-            const userDoc = doc(getFirestore(), 'users', user.user.uid)
-
-            const batch = writeBatch(getFirestore());
-
-            batch.set(userDoc, { email: user.user.email });
-
-            await batch.commit();
 
             toast.success("Logged In")
 
-            console.log('yeah')
-
             router.push('/dashboard')
+
         })
         .catch((error: any) => {
             console.log(error)
@@ -124,7 +108,7 @@ function SignInWithVkButton(){
     const vkConfig = {
         appId: "8075392",
         perms: "4194304",
-        redirectURI: "http://127.0.0.1:3000/vk",
+        redirectURI: "http://127.0.0.1:3000/vk/login",
         version: "5.131"
     };
 

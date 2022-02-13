@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../lib/context';
 
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 export default function Login(props){
     const { user } = useContext(UserContext);
@@ -26,7 +27,7 @@ export default function Login(props){
     )
 }
 
-function SignInButton() {
+function SignInWithGoogleButton() {
 
     const signInWithGoogle = async () => {
         await signInWithPopup(auth, googleAuthProvider).then( async (user) => {
@@ -84,6 +85,7 @@ function RegisterForm(){
 
             toast.success("Created account")
         }).catch((error)=>{
+            console.log(error)
             toast.error("Error")
         })
     };
@@ -98,8 +100,36 @@ function RegisterForm(){
                 <button className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-full py-2 my-4 px-4" type="submit">
                     Register
                 </button>
-                <SignInButton/>
+                <SignInWithGoogleButton/>
+                <SignInWithVkButton/>
             </form>
         </section>
+    )
+}
+
+function SignInWithVkButton(){
+
+    const router = useRouter();
+
+    const vkConfig = {
+        appId: "8075392",
+        perms: "4194304",
+        redirectURI: "http://127.0.0.1:3000/vk/register",
+        version: "5.131"
+    };
+
+    return(
+        <button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4' onClick={() => {
+            router.push({
+                pathname: 'https://oauth.vk.com/authorize',
+                query: {
+                    client_id: vkConfig.appId,
+                    scope: vkConfig.perms,
+                    redirect_uri: vkConfig.redirectURI,
+                    response_type: "code",
+                    v: vkConfig.version
+                }
+            })
+        }}>Register with VK</button>
     )
 }

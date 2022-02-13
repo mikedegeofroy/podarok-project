@@ -22,9 +22,12 @@ export default function Layout({children}){
                     <Image src={'/fox.png'} height={'80px'} width={'80px'}/>
                 </div>
                 <div className="float-right">
-                    <h1 className="text-xl">In partnership with</h1>
-                    <div className="float-right">
-                        <Image src={'/ozon.png'} height={'30px'} width={'130px'}/>
+                    <h1 className="text-xl text-right">In partnership with</h1>
+                    <div className="flex flex-row">
+                        <div className='grid place-items-center m-2'>
+                            <Image src={'/ozon.png'} height={'30px'} width={'130px'}/>
+                        </div>
+                        <Image src={'/lego.png'} height={'50px'} width={'50px'}/>
                     </div>
                 </div>
             </footer>
