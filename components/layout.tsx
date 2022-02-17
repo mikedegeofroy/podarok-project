@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link';
 import Image from 'next/image';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../lib/context';
 
 
