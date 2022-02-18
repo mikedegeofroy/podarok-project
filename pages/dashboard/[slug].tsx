@@ -5,7 +5,6 @@ import { useCollection, useDocumentDataOnce } from "react-firebase-hooks/firesto
 import AuthCheck from "../../components/authcheck";
 import { auth } from "../../lib/firebase";
 import { useState } from "react";
-import Image from 'next/image';
 
 export default function Child() {
 
@@ -76,8 +75,8 @@ function RequestForm(data) {
             <div className="grid gap-4 grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-5 mb-6">
                 {gifts.map(({image, url}, index) => {
                     return(
-                        <a target="_blank" href={url}>
-                            <div className="grid place-items-center shadow text-center h-full w-full rounded-lg p-4" key={index}>
+                        <a key={index} target="_blank" href={url} rel="noreferrer">
+                            <div className="grid place-items-center shadow text-center h-full w-full rounded-lg p-4">
                                 <img src={image}/>
                             </div>
                         </a>
