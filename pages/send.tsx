@@ -53,12 +53,12 @@ function GiftSelector(props){
             </div>
             <div className="m-10">
                 <h1>Select a gift</h1>
-                {selectedGifts.map((x) => {
+                {selectedGifts.map((x, index) => {
 
                     const gift = giftsArray[x]
 
                     return(
-                        <h1>{gift.category}</h1>
+                        <h1 key={index}>{gift.category}</h1>
                     )
                 })}
             </div>
