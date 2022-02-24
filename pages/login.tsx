@@ -12,10 +12,10 @@ export default function Login(){
     const { user } = useContext(UserContext);
 
     return(
-        <div className="grid place-items-center h-screen">
+        <div className="pt-16 mx-auto h-min-screen bg-white">
             <div>
                 {user ? <SignOutButton />  :
-                <div className="w-52">
+                <div className="w-52 mx-auto">
                     <LoginForm/>
                     <SignInWithGoogleButton />
                     <SignInWithVkButton />

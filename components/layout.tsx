@@ -27,6 +27,7 @@ export default function Layout({children}){
                         <div className='grid place-items-center m-2'>
                             <Image src={'/ozon.png'} height={'30px'} width={'130px'}/>
                         </div>
+                        <h1 className="text-3xl pr-2 pl-1">+</h1>
                         <Image src={'/lego.png'} height={'50px'} width={'50px'}/>
                     </div>
                 </div>
@@ -34,3 +35,4 @@ export default function Layout({children}){
         </>
     )
 }
+

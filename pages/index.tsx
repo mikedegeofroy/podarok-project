@@ -23,11 +23,17 @@ export default function Home() {
           </video>
         </div>
         <div>
-          <Link href={redirect}><a className="p-2 m-5">Wish a present</a></Link>
-          <Link href="/"><a className="p-2 m-5">Send a present</a></Link>
+          <Link href="/send"><a className="p-2 m-5 text-4xl">Send a present</a></Link>
+          <Link href={redirect}><a className="p-2 m-5 text-4xl">Wish a present</a></Link>
         </div>
+        <br />
         {/* Here I should have two buttons, one to recive, another one to send */}
         {/* <Link href="/setup"><a className="text-black">Recieve</a></Link> */}
+        <h1 className='text-4xl'>About the project</h1>
+        <h2>Wish a present to recive a present</h2>
+        <h2>Someone Buys that present</h2>
+        <h2>Someone revives that present</h2>
+        <h2>You revive a random present</h2>
       </div>
     </div>
   )

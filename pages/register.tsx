@@ -17,7 +17,7 @@ export default function Login(props){
     // }, [user])
 
     return(
-        <div className="grid place-items-center absolute w-screen h-screen top-0 left-0 bg-white">
+        <div className="pt-16 w-52 mx-auto bg-white">
             {user ? <SignOutButton />  :
             <>
                 <RegisterForm/>
