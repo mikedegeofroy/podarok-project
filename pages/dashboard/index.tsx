@@ -38,8 +38,6 @@ function ProfileData(){
 
     const [user] = useDocumentDataOnce(userDoc)
 
-    console.log(childrenList, user)
-
     return(
         <div className="grid gap-4 grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 mb-6">
             <ChildrenList childrenList={childrenList}/>
