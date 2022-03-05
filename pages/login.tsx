@@ -1,32 +1,41 @@
 import { auth, googleAuthProvider } from '../lib/firebase';
 import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, writeBatch, getFirestore } from 'firebase/firestore'
-import { SetStateAction, useContext, useEffect, useState } from 'react';
+import { SetStateAction, useContext, useState } from 'react';
 import { UserContext } from '../lib/context';
 import { useRouter } from 'next/router';
+
+import { RegisterForm, SignOutButton } from '../components/registerform';
+
+import Image from 'next/image';
 
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 
-export default function Login(){
+export default function Login() {
     const { user } = useContext(UserContext);
 
-    return(
+    return (
         <div className="pt-16 mx-auto h-min-screen bg-white">
-            <div>
-                {user ? <SignOutButton />  :
-                <div className="w-52 mx-auto">
-                    <LoginForm/>
-                    <SignInWithGoogleButton />
-                    <SignInWithVkButton />
-                    {/* <p>Not a user? <Link href="/register"><a className='text-gray-600' >Register</a></Link></p> */}
-                    <Link href="/register"><button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4'>
-                    Register
-                    </button></Link>
-                    <Link href="/ressetpasswd"><a className='text-gray-600' >Forgot Password?</a></Link>
+            {user ? <SignOutButton /> :
+                <div className="grid grid-cols-1 sm:grid-cols-2">
+                    <div className="w-52 mx-auto">
+                        <h1 className='text-2xl	text-center'>Log in</h1>
+                        <LoginForm />
+                        <div className='grid grid-cols-4'>
+                            <SignInWithGoogleButton />
+                            <SignInWithVkButton />
+                        </div>
+                        {/* <p>Not a user? <Link href="/register"><a className='text-gray-600' >Register</a></Link></p> */}
+                        <Link href="/register"><button className='block sm:hidden bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4'>
+                            Register
+                        </button></Link>
+                        <Link href="/ressetpasswd"><a className='text-gray-600' >Forgot Password?</a></Link>
+                    </div>
+                    <div className='hidden sm:block'>
+                        <RegisterForm />
+                    </div>
                 </div>
-                }
-            </div>
+            }
         </div>
     )
 }
@@ -35,28 +44,21 @@ function SignInWithGoogleButton() {
     const router = useRouter()
 
     const signInWithGoogle = async () => {
-        await signInWithPopup(auth, googleAuthProvider).then( async (user) => {
+        await signInWithPopup(auth, googleAuthProvider).then(async (user) => {
             toast.success('Logged In')
 
             router.push('/dashboard')
         });
     }
 
-    return(
-        <div>   
-            <button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container my-4' onClick={signInWithGoogle}>
-                Sign in with Google
-            </button>
+    return (
+        <div className='bg-white select-none cursor-pointer w-max shadow grid place-items-center text-center h-full hover:bg-slate-100 font-bold py-2 px-4 rounded container' onClick={signInWithGoogle}>
+            <Image src="/google.webp" width="20px" height="20px"></Image>
         </div>
     )
 }
 
-function SignOutButton(){
-    return <button onClick={() => {auth.signOut(); toast.success('Logged Out')}}>You are already logged in, do you want to Log Out?</button>;
-}
-
-
-function LoginForm(){
+function LoginForm() {
     const router = useRouter()
 
     const [formEmail, setFormEmail] = useState('');
@@ -74,34 +76,36 @@ function LoginForm(){
         e.preventDefault();
 
         signInWithEmailAndPassword(auth, formEmail, formPassword)
-        .then( async (user) => {
+            .then(async (user) => {
 
-            toast.success("Logged In")
+                toast.success("Logged In")
 
-            router.push('/dashboard')
+                router.push('/dashboard')
 
-        })
-        .catch((error: any) => {
-            console.log(error)
-        });
+            })
+            .catch((error: any) => {
+                console.log(error)
+            });
     };
 
-    return(
-        <section>
-            <form onSubmit={onSubmit}>
-                <h3>Email</h3>
-                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6' name="username" onChange={onChangeEmail}/>
-                <h3>Password</h3>
-                <input className='shadow appearance-none border rounded w-full mb-6 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' name="password" onChange={onChangePassword}/>
-                <button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4' type="submit">
-                    Login
-                </button>
-            </form>
-        </section>
+    return (
+        <div>
+            <section>
+                <form onSubmit={onSubmit}>
+                    <h3>Email</h3>
+                    <input className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6' name="username" onChange={onChangeEmail} />
+                    <h3>Password</h3>
+                    <input className='appearance-none border rounded w-full mb-6 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' name="password" onChange={onChangePassword} />
+                    <button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4' type="submit">
+                        Login
+                    </button>
+                </form>
+            </section>
+        </div>
     )
 }
 
-function SignInWithVkButton(){
+function SignInWithVkButton() {
 
     const router = useRouter();
 
@@ -112,8 +116,8 @@ function SignInWithVkButton(){
         version: "5.131"
     };
 
-    return(
-        <button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4' onClick={() => {
+    return (
+        <div className='bg-[#0077fe] cursor-pointer select-none hover:bg-[#0055fe] grid place-items-center text-center h-full w-full shadow font-bold py-2 px-4 rounded container block' onClick={() => {
             router.push({
                 pathname: 'https://oauth.vk.com/authorize',
                 query: {
@@ -124,6 +128,6 @@ function SignInWithVkButton(){
                     v: vkConfig.version
                 }
             })
-        }}>Sign in with VK</button>
+        }}><Image src="/vk.png" width="200px" height="200px"></Image></div>
     )
 }
