@@ -8,6 +8,7 @@
     }
 
     html {
+        background-color: white;
         overflow: scroll;
         overflow-x: hidden;
     }

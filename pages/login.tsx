@@ -29,7 +29,6 @@ export default function Login() {
                         <Link href="/register"><button className='block sm:hidden bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4'>
                             Register
                         </button></Link>
-                        <Link href="/ressetpasswd"><a className='text-gray-600' >Forgot Password?</a></Link>
                     </div>
                     <div className='hidden sm:block'>
                         <RegisterForm />
@@ -95,7 +94,8 @@ function LoginForm() {
                     <h3>Email</h3>
                     <input className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6' name="username" onChange={onChangeEmail} />
                     <h3>Password</h3>
-                    <input className='appearance-none border rounded w-full mb-6 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' name="password" onChange={onChangePassword} />
+                    <input className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' name="password" onChange={onChangePassword} />
+                    <Link href="/ressetpasswd"><a className='text-gray-600' >Forgot Password?</a></Link>
                     <button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4' type="submit">
                         Login
                     </button>
