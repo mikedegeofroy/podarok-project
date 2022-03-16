@@ -12,7 +12,7 @@ export default function Admin(){
             {user && user.providerData[0].email == "mikedegeofroy@gmail.com" ? <>
                 This is the console for you to get all your cool stuff
             </> : <>
-                Sorry, don't have access to this page.
+                Sorry, don&apos;'t have access to this page.
             </>}
 
         </div>
