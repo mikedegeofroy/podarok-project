@@ -1,6 +1,6 @@
 
 import { auth, storage, STATE_CHANGED } from "../../../lib/firebase";
-import { collection, doc, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import router from 'next/router';
 import { useEffect, useState } from 'react';
 import { useCollection, useDocumentDataOnce } from 'react-firebase-hooks/firestore';
@@ -35,11 +35,11 @@ function RequestForm() {
 
 
     return child ? (
-        <GiftSelector child={child}></GiftSelector>
+        <GiftSelector child={child} childRef={childRef}></GiftSelector>
     ) : (<></>)
 }
 
-function GiftSelector({ child }) {
+function GiftSelector({ child, childRef }) {
 
     // Get a list of gifts
 
@@ -132,7 +132,10 @@ function GiftSelector({ child }) {
         // Some logic to upload a image, on send, we add a value to the whishes, not verified, gift data, image url
     ) : formVis ? (<div>
         <h1 className="text-center text-4xl">Now you have to upload a photo of the letter so it can be shown.</h1>
-        <div className="grid place-items-center h-[70vh]">
+        <button className='bg-black hover:bg-slate-900 text-white font-bold rounded container py-2 my-4 px-4 z-10 w-max cursor-pointer' onClick={ () => {
+            setFormVis(false)
+        }}>Back</button>
+        <div className="grid place-items-center min-h-[70vh]">
             <div>
                 <div>
                     {uploading && <h3>{progress}%</h3>}
@@ -154,8 +157,9 @@ function GiftSelector({ child }) {
                     console.log(downloadURL)
                     console.log(child)
 
-                    let selectedGift = gifts[selected[0]]
-                    await setDoc(giftRef, {
+                    let selectedGift = gifts[selected[0]];
+
+                    const wishRef = await addDoc(collection(getFirestore(), "wishes"), {
                         age: child.birthday,
                         name: child.name,
                         letter: downloadURL,
@@ -164,6 +168,23 @@ function GiftSelector({ child }) {
                         url: selectedGift.url, 
                         approved: false,
                     });
+                    
+                    // let wishRef = await setDoc(giftRef, {
+                    //     age: child.birthday,
+                    //     name: child.name,
+                    //     letter: downloadURL,
+                    //     category: selectedGift.category,
+                    //     image: selectedGift.image,
+                    //     url: selectedGift.url, 
+                    //     approved: false,
+                    // });
+
+                    // get the id of the doc, add it to selected field
+
+                    await updateDoc(childRef, {status: "requested", requested: wishRef.id}).then( () => {
+                        router.push(`/dashboard/${child.slug}`)
+                        toast.success('Wish sent for review.')
+                    })
                     // Check if image is uploaded and add as a unverified wish, that I can then display in the admin tab, maybe even send me a email
                     // If things go to shit, i'll make a bot to send out orders to buy presents. 
                 }}>Save</button>

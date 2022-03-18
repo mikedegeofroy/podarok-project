@@ -1,10 +1,10 @@
-import { collection, doc, getFirestore, query, where, updateDoc, deleteField, setDoc } from "firebase/firestore";
+import { doc, getFirestore, updateDoc, deleteField, deleteDoc } from "firebase/firestore";
 import Link from "next/link";
 import router from "next/router";
-import { useCollection, useDocumentDataOnce } from "react-firebase-hooks/firestore";
+import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
 import AuthCheck from "../../../components/authcheck";
 import { auth } from "../../../lib/firebase";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function Child() {
@@ -122,11 +122,9 @@ function ChildForm({ defaultValues, childRef }) {
 
 function ShowRequested({ gifts, childRef, editControls  }) {
 
-    const giftsRef = doc(getFirestore(), 'avaibable-gifts', gifts)
+    const giftsRef = doc(getFirestore(), 'wishes', gifts);
 
     const [gift] = useDocumentDataOnce(giftsRef);
-
-
 
     console.log(gift, editControls[0])
 
@@ -136,9 +134,7 @@ function ShowRequested({ gifts, childRef, editControls  }) {
             status: "avaibable", requested: deleteField() 
         })
 
-        await updateDoc(giftsRef, {
-            selected: false
-        });
+        await deleteDoc(giftsRef);
 
         editControls[1](false)
         
