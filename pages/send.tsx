@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 
 export default function Send(){
-    const giftsRef = collection(getFirestore(), 'avaibable-gifts')
+    const giftsRef = collection(getFirestore(), 'wishes')
 
-    const giftsQuery = query(giftsRef, where("selected", "==", true))
+    const giftsQuery = query(giftsRef, where("approved", "==", true))
 
     const [querySnapshot] = useCollection(giftsQuery)
 
@@ -34,7 +34,7 @@ function GiftSelector(props){
 
     return(
         <>
-            <div className="grid gap-4 grid-cols-3 mb-6 m-10">
+            <div className="grid gap-4 grid-cols-2 mb-6 m-10">
                 {giftsArray.map((element, index) => {
                     return(
                         <div onClick={ () => {
