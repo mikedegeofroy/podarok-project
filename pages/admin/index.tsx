@@ -22,9 +22,9 @@ export default function Admin(){
             {user && user.providerData[0].email == "mikedegeofroy@gmail.com" ? <>
                 This is the console for you to get all your cool stuff
                 <div className='grid grid-cols-2'>
-                    {gifts && gifts.map( (gift) => {
+                    {gifts && gifts.map( (gift, index) => {
                         return(
-                            <div>
+                            <div key={index}>
                                 <img src={gift.letter}></img>
                                 {/* button to accept or reject */}
                             </div>
