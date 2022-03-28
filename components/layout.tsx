@@ -14,7 +14,7 @@ export default function Layout({children}){
                 <div className="h-auto w-40 cursor-pointer">
                     <Link href="/"><Image priority src="/logo.png" width="4755px" height="853px" layout='responsive'></Image></Link>
                 </div>
-                {user ? <Link href="/dashboard">{user.email}</Link> : <Link href="/login">Log in</Link>}
+                {user ? <Link href="/dashboard">центр управления</Link> : <Link href="/login">Log in</Link>}
             </div>
             <main>{children}</main>
             <footer className="p-4">
@@ -22,7 +22,7 @@ export default function Layout({children}){
                     <Image src={'/fox.png'} height={'80px'} width={'80px'}/>
                 </div>
                 <div className="float-right">
-                    <h1 className="text-xl text-right">In partnership with</h1>
+                    <h1 className="text-xl text-right">В сотрудничестве с</h1>
                     <div className="flex flex-row">
                         <div className='grid place-items-center m-2'>
                             <Image src={'/ozon.png'} height={'30px'} width={'130px'}/>

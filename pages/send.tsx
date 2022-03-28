@@ -12,7 +12,7 @@ export default function Send(){
     const gifts = querySnapshot?.docs.map((doc) => doc.data());
 
     return(
-        <div className="grid grid-cols-2 pt-16">
+        <div className="grid grid-cols-2 h-screen pt-16">
             {gifts ? (<GiftSelector gifts={gifts}/>) : (<></>)}
         </div>
     )
@@ -44,21 +44,27 @@ function GiftSelector(props){
                             } else {
                                 removeSelectedGift(index)
                             }
-                        }} className={!selectedGifts.includes(index) ? "select-none shadow rounded-lg p-4 h-full w-full" : "select-none shadow-xl rounded-lg p-4 h-full w-full"} key={index}>
+                        }} className={!selectedGifts.includes(index) ? "select-none shadow rounded-lg p-4 h-min w-full" : "select-none shadow-xl rounded-lg p-4 h-min w-full"} key={index}>
                             {/* <a className="grid place-items-center text-center h-full w-full" href={element.url} rel="noopener noreferrer" target="_blank"></a> */}
-                            <img src={element.image} alt="" />
+                            <img src={element.letter} alt="" />
                         </div>
                     )
                 })}
             </div>
             <div className="m-10">
-                <h1>Select a gift</h1>
+                <h1>Select a wish</h1>
                 {selectedGifts.map((x, index) => {
 
                     const gift = giftsArray[x]
 
+                    console.log(gift)
+
                     return(
-                        <h1 key={index}>{gift.category}</h1>
+                        <div key={index}>
+                            <h1>{gift.name}</h1>
+                            <h1>{gift.age}</h1>
+                            <img src={gift.image} alt="" />
+                        </div>
                     )
                 })}
             </div>

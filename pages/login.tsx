@@ -17,7 +17,7 @@ export default function Login() {
     return (
         <div className="pt-16 mx-auto h-min-screen bg-white">
             {user ? <SignOutButton /> :
-                <div className="grid grid-cols-1 sm:grid-cols-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 place-items-center h-[80vh]">
                     <div className="w-52 mx-auto">
                         <h1 className='text-2xl	text-center'>Log in</h1>
                         <LoginForm />
@@ -92,9 +92,9 @@ function LoginForm() {
             <section>
                 <form onSubmit={onSubmit}>
                     <h3>Email</h3>
-                    <input className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6' name="username" onChange={onChangeEmail} />
+                    <input type="email" autoComplete='email' className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6' name="username" onChange={onChangeEmail} />
                     <h3>Password</h3>
-                    <input className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' name="password" onChange={onChangePassword} />
+                    <input type="password" className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' name="password" onChange={onChangePassword} />
                     <Link href="/ressetpasswd"><a className='text-gray-600' >Forgot Password?</a></Link>
                     <button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4' type="submit">
                         Login
@@ -117,7 +117,7 @@ function SignInWithVkButton() {
     };
 
     return (
-        <div className='bg-[#0077fe] cursor-pointer select-none hover:bg-[#0055fe] grid place-items-center text-center h-full w-full shadow font-bold py-2 px-4 rounded container block' onClick={() => {
+        <div className='bg-[#0077fe] cursor-pointer select-none hover:bg-[#0055fe] grid place-items-center text-center h-full w-full shadow font-bold py-2 px-4 rounded container' onClick={() => {
             router.push({
                 pathname: 'https://oauth.vk.com/authorize',
                 query: {

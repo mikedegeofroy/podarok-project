@@ -1,30 +1,68 @@
 import { auth } from '../../lib/firebase'
+import { deleteUser } from 'firebase/auth'
 import AuthCheck from '../../components/authcheck'
 import { useDocumentDataOnce, useCollection } from 'react-firebase-hooks/firestore';
 import { getFirestore, doc, collection, query } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 
 import toast from 'react-hot-toast';
-import Image from 'next/image'
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function UserProfile(){
 
     return(
         <AuthCheck>
             <div className="sm:mx-16 pt-16 mx-8">
-                <h1 className="mb-6 text-2xl">Children</h1>
+                <h1 className="mb-6 text-2xl">Дети</h1>
                 <ProfileData/>
                 <SignOutButton/>
+                <DeleteAccountButton/>
             </div>
         </AuthCheck>
     )
 
 }
 
+function DeleteAccountButton(){
+    const router = useRouter()
+
+    const [confirmState, setConfirmState] = useState(0)
+
+    const messages = ['Удалить Аккаунт', 'Вы уверены, что хотите удалить свой аккаунт?', 'Вы действительно уверены?', 'Ok.']
+
+    const styles = ['bg-black hover:bg-slate-900', 'bg-red-700 hover:bg-red-800', 'bg-red-500 hover:bg-red-600', 'bg-green-500']
+
+    useEffect( () => {
+
+        if(confirmState != 0){
+            setTimeout( ()=> {
+                setConfirmState(0)
+            },5000)
+        }
+
+        if(confirmState == 3){
+            deleteUser(auth.currentUser);
+            router.push("/")
+        }
+    }, [confirmState])
+
+    return(
+        <>
+            <button onClick={() => {
+                if(confirmState < messages.length - 1){
+                    setConfirmState(confirmState + 1)
+                } else {
+                    setConfirmState(0)
+                }
+            }} className={`${styles[confirmState]} text-white font-bold rounded mx-2 container w-auto py-2 px-4`}>{messages[confirmState]}</button>
+        </>
+    )
+}
+
 function SignOutButton(){
     const router = useRouter()
-    return <button className='bg-black hover:bg-slate-900 text-white font-bold rounded container w-auto py-2 px-4' onClick={() => {auth.signOut().then( () => {router.push('/login'); toast.success('Logged Out')})}}>Log Out</button>;
+    return <button className='bg-black hover:bg-slate-900 mr-2 text-white font-bold rounded container w-auto py-2 px-4' onClick={() => {auth.signOut().then( () => {router.push('/login'); toast.success('Logged Out')})}}>Выйти</button>;
 }
 
 function ProfileData(){
@@ -48,6 +86,8 @@ function ProfileData(){
 function ChildrenList(data){
     let children = data.childrenList
 
+    console.log(children)
+
     return children ? <>
     {children.map(({ name, gender, slug, status }, index) => { 
         let color = "bg-blue-50"
@@ -66,5 +106,5 @@ function ChildrenList(data){
     }
     
     </> : 
-    <h1>Loading..</h1>
+    <h1>загрузка...</h1>
 }

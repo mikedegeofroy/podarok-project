@@ -18,6 +18,9 @@ function SignInWithGoogleButton() {
             batch.set(userDoc, { email: user.user.email });
 
             await batch.commit();
+        }).catch((error)=>{
+            console.log(error)
+            toast.error("Error")
         });
     }
 
@@ -72,9 +75,9 @@ export function RegisterForm(){
             <h1 className='text-2xl	text-center'>Register</h1>
             <form onSubmit={onSubmit}>
                 <h3>Email</h3>
-                <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-6" name="username" onChange={onChangeEmail}/>
+                <input type="email" autoComplete='email' className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-6" name="username" onChange={onChangeEmail}/>
                 <h3>Password</h3>
-                <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-6" name="password" onChange={onChangePassword}/>
+                <input type="password" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-6" name="password" onChange={onChangePassword}/>
                 <button className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-full py-2 my-4 px-4" type="submit">
                     Register
                 </button>
@@ -99,7 +102,7 @@ function SignInWithVkButton(){
     };
 
     return(
-        <div className='bg-[#0077fe] select-none cursor-pointer hover:bg-[#0055fe] grid place-items-center text-center h-full w-full shadow font-bold py-2 px-4 rounded container block' onClick={() => {
+        <div className='bg-[#0077fe] select-none cursor-pointer hover:bg-[#0055fe] grid place-items-center text-center h-full w-full shadow font-bold py-2 px-4 rounded container' onClick={() => {
             router.push({
                 pathname: 'https://oauth.vk.com/authorize',
                 query: {

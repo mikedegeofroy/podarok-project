@@ -106,6 +106,9 @@ function GiftSelector({ child, childRef }) {
 
     return gifts && !formVis ? (
         <div>
+            <button className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-auto py-2 my-4 px-4 z-10" onClick={() => {
+                router.push(`/dashboard/${child.slug}`)
+            }}>Back</button>
             <div className="grid gap-4 grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-5 mb-6">
                 {gifts.map(({ image }, index) => {
                     return (
@@ -168,16 +171,6 @@ function GiftSelector({ child, childRef }) {
                         url: selectedGift.url, 
                         approved: false,
                     });
-                    
-                    // let wishRef = await setDoc(giftRef, {
-                    //     age: child.birthday,
-                    //     name: child.name,
-                    //     letter: downloadURL,
-                    //     category: selectedGift.category,
-                    //     image: selectedGift.image,
-                    //     url: selectedGift.url, 
-                    //     approved: false,
-                    // });
 
                     // get the id of the doc, add it to selected field
 

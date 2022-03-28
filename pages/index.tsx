@@ -24,8 +24,8 @@ export default function Home() {
           </video>
         </div>
         <div>
-          <Link href="/send"><a className="p-2 m-5 text-2xl md:text-4xl">Send a present</a></Link>
-          <Link href={redirect}><a className="p-2 m-5 text-2xl md:text-4xl">Wish a present</a></Link>
+          <Link href="/send"><a className="p-2 m-5 text-2xl md:text-4xl">Послать Поадрок</a></Link>
+          <Link href={redirect}><a className="p-2 m-5 text-2xl md:text-4xl">Пожелать Подарок</a></Link>
         </div>
         <br />
         {/* Here I should have two buttons, one to recive, another one to send */}
