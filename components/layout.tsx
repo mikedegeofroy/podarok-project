@@ -11,10 +11,16 @@ export default function Layout({children}){
     return(
         <>
             <div className="z-10 flex w-screen justify-between p-4 fixed top-0 h-16 bg-white">
+                {/* <div className="h-auto w-40 cursor-pointer"> */}
                 <div className="h-auto w-40 cursor-pointer">
-                    <Link href="/"><Image priority src="/logo.png" width="4755px" height="853px" layout='responsive'></Image></Link>
+                    {/* width="751px" height="291px" */}
+                    {/* width="4755px" height="853px" */}
+                    <Link href="/"><Image priority src="/logo2.png" width="4755px" height="853px" layout='responsive'></Image></Link>
+                    {/* <Link href="/"><Image priority src="/logo.png" width="375px" height="145px" layout='responsive'></Image></Link> */}
                 </div>
-                {user ? <Link href="/dashboard">центр управления</Link> : <Link href="/login">Log in</Link>}
+                <div className='border border-black rounded-sm p-1'>
+                {user ? <Link href="/dashboard">Центр Управления</Link> : <Link href="/login">Войти</Link>}
+                </div>
             </div>
             <main>{children}</main>
             <footer className="p-4">

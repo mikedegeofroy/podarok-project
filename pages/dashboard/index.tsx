@@ -16,8 +16,9 @@ export default function UserProfile(){
             <div className="sm:mx-16 pt-16 mx-8">
                 <h1 className="mb-6 text-2xl">Дети</h1>
                 <ProfileData/>
+                <h1 className="mb-6 text-2xl">Аккаунт</h1>
                 <SignOutButton/>
-                <DeleteAccountButton/>
+                {/* <DeleteAccountButton/> */}
             </div>
         </AuthCheck>
     )
@@ -102,7 +103,7 @@ function ChildrenList(data){
         )
     })}
     {children.length < 4 && 
-        <Link href="/dashboard/add"><div key="3" className={`flex justify-center align-middle h-full w-full rounded-lg p-4 bg-slate-50 text-2xl`}>+</div></Link>
+        <Link href="/dashboard/add"><div key="3" className={`flex justify-center align-middle h-full w-full rounded-lg p-4 bg-slate-50 text-5xl`}><h1>+</h1></div></Link>
     }
     
     </> : 

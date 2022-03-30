@@ -119,8 +119,6 @@ function ChildForm({ defaultValues, childRef }) {
                 {/* This is the edit form */}
                 <input name="username" className="w-32 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6" defaultValue={childName} onChange={(e) => { setChildName(e.target.value) }}></input>
 
-                {/* <input id="birthday" name="birthday" min="2006-01-01" max="2013-01-01" className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6" type="date" defaultValue={childBirthday} onChange={(e) => { setChildBirthday(e.target.value) }}></input> */}
-
                 <h1>{birthday}</h1>
 
                 <Calendar onChange={setChildBirthday} value={new Date(childBirthday)} defaultValue={new Date(2013, 3, 25)} minDetail={'year'} minDate={minDate} maxDate={maxDate}></Calendar>
@@ -138,16 +136,21 @@ function ChildForm({ defaultValues, childRef }) {
 
                 <button type="submit" className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-auto py-2 my-4 px-4">Save</button>
 
-                <button type="button" onClick={() => {
+                <button type="button" onClick={async () => {
                     if (confirmState < messages.length - 1) {
                         setConfirmState(confirmState + 1)
                     } else {
                         setConfirmState(0)
                     }
+
+                    const giftsRef = doc(getFirestore(), 'wishes', defaultValues.requested);
+
+                    await deleteDoc(giftsRef);
                 }} className={`${styles[confirmState]} text-white font-bold rounded mx-2 container w-auto py-2 px-4`}>{messages[confirmState]}</button>
-            </form>)}
-            {defaultValues.requested ? (<ShowRequested gifts={defaultValues.requested} editControls={[editing, setEditing]} childRef={childRef} />) : (<></>)}
-        </div>
+            </form>)
+}
+{ defaultValues.requested ? (<ShowRequested gifts={defaultValues.requested} editControls={[editing, setEditing]} childRef={childRef} />) : (<></>) }
+        </div >
     )
 
 }
