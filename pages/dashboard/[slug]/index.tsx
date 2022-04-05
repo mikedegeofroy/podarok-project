@@ -7,12 +7,13 @@ import { auth } from "../../../lib/firebase";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Calendar from 'react-calendar'
+import Image from "next/image";
 
 export default function Child() {
 
     return (
         <AuthCheck>
-            <div className="sm:mx-16 pt-16 mx-8">
+            <div className="pt-16">
                 <ChildManager />
             </div>
         </AuthCheck>
@@ -35,11 +36,17 @@ function ChildManager() {
         <>
             {child ? (
                 <div>
-                    <Link href="/dashboard"><button className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-auto py-2 my-4 px-4">Назад</button></Link>
-
-                    <ChildForm defaultValues={child} childRef={childRef} />
+                    <div className=" sm:mx-16  mx-8">
+                        <Link href="/dashboard"><button className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-auto py-2 my-4 px-4 font-['Kuku']">Назад</button></Link>
+                        <ChildForm defaultValues={child} childRef={childRef} />
+                    </div>
+                    <div className='pt-10 object-top w-full overflow-hidden py-5'>
+                        <div className='scale-150 md:scale-110'>
+                            <Image src={'/images/les1.png'} height="997px" width="7111px"></Image>
+                        </div>
+                    </div>
                 </div>
-            ) : (<div className="grid place-items-center w-screen h-screen top-0 left-0 bg-white">загрузка...</div>)}
+            ) : (<div className="grid place-items-center w-screen h-screen top-0 left-0 bg-white font-['Kuku']">загрузка...</div>)}
         </>
     )
 }
@@ -114,7 +121,7 @@ function ChildForm({ defaultValues, childRef }) {
                 </div>
                 {defaultValues.status == "avaibable" ? (
                     <Link href={`/dashboard/${slug}/request`}><div className="w-32 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight mb-3">{defaultValues.status}</div></Link>) : (<div className="w-32 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight mb-3">{defaultValues.status}</div>)}
-                <button onClick={() => { setEditing(true) }} className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-auto py-2 my-4 px-4">редактировать</button>
+                <button onClick={() => { setEditing(true) }} className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-auto py-2 my-4 px-4 font-['Kuku']">редактировать</button>
             </div>) : (<form onSubmit={onSubmit}>
                 {/* This is the edit form */}
                 <input name="username" className="w-32 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6" defaultValue={childName} onChange={(e) => { setChildName(e.target.value) }}></input>
@@ -148,8 +155,8 @@ function ChildForm({ defaultValues, childRef }) {
                     await deleteDoc(giftsRef);
                 }} className={`${styles[confirmState]} text-white font-bold rounded mx-2 container w-auto py-2 px-4`}>{messages[confirmState]}</button>
             </form>)
-}
-{ defaultValues.requested ? (<ShowRequested gifts={defaultValues.requested} editControls={[editing, setEditing]} childRef={childRef} />) : (<></>) }
+            }
+            {defaultValues.requested ? (<ShowRequested gifts={defaultValues.requested} editControls={[editing, setEditing]} childRef={childRef} />) : (<></>)}
         </div >
     )
 

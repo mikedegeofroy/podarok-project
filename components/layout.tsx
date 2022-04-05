@@ -11,27 +11,23 @@ export default function Layout({children}){
     return(
         <>
             <div className="z-10 flex w-screen justify-between p-4 fixed top-0 h-16 bg-white">
-                {/* <div className="h-auto w-40 cursor-pointer"> */}
                 <div className="h-auto w-40 cursor-pointer">
-                    {/* width="751px" height="291px" */}
-                    {/* width="4755px" height="853px" */}
-                    <Link href="/"><Image priority src="/logo2.png" width="4755px" height="853px" layout='responsive'></Image></Link>
-                    {/* <Link href="/"><Image priority src="/logo.png" width="375px" height="145px" layout='responsive'></Image></Link> */}
+                    <Link href="/"><Image priority src="/icons/logo.png" width="4755px" height="853px" layout='responsive'></Image></Link>
                 </div>
-                <div className='border border-black rounded-sm p-1'>
-                {user ? <Link href="/dashboard">Центр Управления</Link> : <Link href="/login">Войти</Link>}
-                </div>
+                
+                {user ? <div className='w-6 cursor-pointer'><Link href="/dashboard"><Image priority src="/icons/home.png" width="415px" height="501px" layout='responsive'></Image></Link></div> : <div className="p-1 font-['Kuku']"><Link href="/login">Войти</Link></div>}
+                
             </div>
             <main>{children}</main>
             <footer className="p-4">
                 <div className="float-left">
-                    <Image src={'/fox.png'} height={'80px'} width={'80px'}/>
+                    <Image src={'/images/fox.png'} height={'80px'} width={'80px'}/>
                 </div>
                 <div className="float-right">
                     <h1 className="text-xl text-right">В сотрудничестве с</h1>
                     <div className="flex flex-row">
                         <div className='grid place-items-center m-2'>
-                            <Image src={'/ozon.png'} height={'30px'} width={'130px'}/>
+                            <Image src={'/icons/ozon.png'} height={'30px'} width={'130px'}/>
                         </div>
                         {/* <h1 className="text-3xl pr-2 pl-1">+</h1>
                         <Image src={'/lego.png'} height={'50px'} width={'50px'}/> */}

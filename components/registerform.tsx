@@ -26,7 +26,7 @@ function SignInWithGoogleButton() {
 
     return(
         <div className='bg-white select-none cursor-pointer w-max shadow grid place-items-center text-center h-full hover:bg-slate-100 font-bold py-2 px-4 rounded container' onClick={signInWithGoogle}>
-            <Image src="/google.webp" width="20px" height="20px"></Image>
+            <Image src="/icons/google.webp" width="20px" height="20px"></Image>
         </div>
     )
 }
@@ -113,6 +113,6 @@ function SignInWithVkButton(){
                     v: vkConfig.version
                 }
             })
-        }}><Image src="/vk.png" width="200px" height="200px"></Image></div>
+        }}><Image src="/icons/vk.png" width="200px" height="200px"></Image></div>
     )
 }
