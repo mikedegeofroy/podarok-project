@@ -12,16 +12,26 @@ export default function Send() {
     const gifts = querySnapshot?.docs.map((doc) => doc.data());
 
     return (
-        <div className="grid lg:grid-cols-2 grid-cols-1 h-auto pt-16">
+        // grid lg:grid-cols-2 grid-cols-1
+        <div className="grid place-items-center h-auto pt-16">
             {gifts ? (<GiftSelector gifts={gifts} />) : (<></>)}
         </div>
     )
 }
 
 function GiftSelector(props) {
-    const giftsArray = props.gifts
-
     const [selectedGifts, setSelectedGifts] = useState([])
+    const [showGift, setShowGift] = useState(0)
+
+    let giftsArray = props.gifts.map((element, index) => {
+        return (
+            <div className={!selectedGifts.includes(index) ? "select-none shadow rounded-lg p-4 h-min w-fit" : "select-none shadow-xl rounded-lg p-4 h-min w-fit"} key={index}>
+                <img src={element.letter} alt="" />
+            </div>
+        )
+    })
+
+    console.log(giftsArray, showGift)
 
     const removeSelectedGift = (e) => {
         let name = e
@@ -33,42 +43,36 @@ function GiftSelector(props) {
     }, [selectedGifts])
 
     return (
-        <>
-            <div className="m-10">
-                <h1>Select a wish</h1>
-                {selectedGifts.map((x, index) => {
-
-                    const gift = giftsArray[x]
-
-                    console.log(gift)
-
-                    return (
-                        <div key={index}>
-                            <h1>{gift.name}</h1>
-                            <h1>{gift.age}</h1>
-                            <img src={gift.image} alt="" />
-                        </div>
-                    )
-                })}
+        <div className="p-[10vh] w-full">
+            <div className="flex justify-center font-['Kuku']">
+                <button onClick={() => {
+                    if (showGift - 1 >= 0) {
+                        setShowGift(showGift - 1)
+                    } else {
+                        setShowGift(giftsArray.length - 1)
+                    }
+                }}>{"<"}</button>
+                <div className="w-[30%] flex justify-center">
+                    <button onClick={() => {
+                        if (!selectedGifts.includes(showGift)) {
+                            setSelectedGifts(oldArray => [...oldArray, showGift])
+                        } else {
+                            removeSelectedGift(showGift)
+                        }
+                    }}>{!selectedGifts.includes(showGift) ? ("Выбрать") : ("Выбранно")}</button>
+                </div>
+                <button onClick={() => {
+                    if (showGift + 1 <= giftsArray.length - 1) {
+                        setShowGift(showGift + 1)
+                    } else {
+                        setShowGift(0)
+                    }
+                }}>{">"}</button>
             </div>
-            <div className="grid gap-4 grid-cols-2 mb-6 m-10">
-                {giftsArray.map((element, index) => {
-                    return (
-                        <div onClick={() => {
-                            // && selectedGifts.length <= 2
-                            if (!selectedGifts.includes(index)) {
-                                setSelectedGifts(oldArray => [...oldArray, index])
-                            } else {
-                                removeSelectedGift(index)
-                            }
-                        }} className={!selectedGifts.includes(index) ? "select-none shadow rounded-lg p-4 h-min w-full" : "select-none shadow-xl rounded-lg p-4 h-min w-full"} key={index}>
-                            {/* <a className="grid place-items-center text-center h-full w-full" href={element.url} rel="noopener noreferrer" target="_blank"></a> */}
-                            <img src={element.letter} alt="" />
-                        </div>
-                    )
-                })}
+            <div className="grid">
+                {giftsArray[showGift]}
             </div>
-        </>
+        </div>
     )
 
 }

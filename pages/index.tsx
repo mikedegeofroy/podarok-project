@@ -38,10 +38,13 @@ export default function Home() {
         </div>
       </div>
       {/* About Comic */}
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-10 py-10'>
-        <div className='col-span-1 lg:col-span-2 p-2'>
-          <h1 className="text-4xl font-medium font-['Kuku']">Про наш проект</h1>
-          <p className='text-justify md:text-left'>А тут должны быть несколько строчек про то, какой это крутой проект.</p>
+      <div className='grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-10 py-10'>
+        <h1 className="text-4xl font-medium font-['Kuku'] col-span-1 md:col-span-2 lg:col-span-1">Про наш проект</h1>
+        <div className='col-span-1 p-2 text-md md:text-lg'>
+          <div className='grid place-items-center md:m-10'>
+            <p className='md:text-left'>Рребенок, получающий благотворительную помощь, чувствует себя униженным. Для смягчения этого нежелательного социального эффекта платформа позволяет нуждающемуся ребенку выбрать подарок не для себя, а для другого ребенка, оказывая положительное подкрепляющее воздействие на его психику.<br /> <br />
+              Подарки, выбранные из каталога ozon, затем предоставляются для покупки щедрым донорам и распределяются в соответствии с алгоритмом, который учитывает пол, возраст, день рождения и другие факторы для оптимизации распределения.</p>
+          </div>
         </div>
         <div className='col-span-1 p-2'>
           <div className='grid gap-4 grid-cols-6 auto-cols-max w-fit mx-auto'>
