@@ -72,14 +72,14 @@ export function RegisterForm(){
 
     return(
         <div className="w-52 mx-auto">
-            <h1 className='text-2xl	text-center'>Register</h1>
+            <h1 className='text-2xl	text-center'>Регистраиция</h1>
             <form onSubmit={onSubmit}>
-                <h3>Email</h3>
+                <h3>Почта</h3>
                 <input type="email" autoComplete='email' className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-6" name="username" onChange={onChangeEmail}/>
-                <h3>Password</h3>
+                <h3>Пароль</h3>
                 <input type="password" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-6" name="password" onChange={onChangePassword}/>
                 <button className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-full py-2 my-4 px-4" type="submit">
-                    Register
+                    Регистраиция
                 </button>
                 <div className='grid grid-cols-4'>
                     <SignInWithGoogleButton />

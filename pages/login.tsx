@@ -15,11 +15,11 @@ export default function Login() {
     const { user } = useContext(UserContext);
 
     return (
-        <div className="pt-16 mx-auto h-min-screen bg-white">
+        <div className="pt-16 mx-auto h-min-screen bg-white font-['Kuku']">
             {user ? <SignOutButton /> :
                 <div className="grid grid-cols-1 sm:grid-cols-2 place-items-center h-[80vh]">
                     <div className="w-52 mx-auto">
-                        <h1 className='text-2xl	text-center'>Log in</h1>
+                        <h1 className='text-2xl	text-center'>Войти</h1>
                         <LoginForm />
                         <div className='grid grid-cols-4'>
                             <SignInWithGoogleButton />
@@ -94,13 +94,13 @@ function LoginForm() {
         <div>
             <section>
                 <form onSubmit={onSubmit}>
-                    <h3>Email</h3>
+                    <h3>Почта</h3>
                     <input type="email" autoComplete='email' className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6' name="username" onChange={onChangeEmail} />
-                    <h3>Password</h3>
+                    <h3>Пароль</h3>
                     <input type="password" className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' name="password" onChange={onChangePassword} />
-                    <Link href="/ressetpasswd"><a className='text-gray-600' >Forgot Password?</a></Link>
+                    <Link href="/ressetpasswd"><a className='text-gray-600' >Забыли пароль?</a></Link>
                     <button className='bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4' type="submit">
-                        Login
+                        Войти
                     </button>
                 </form>
             </section>

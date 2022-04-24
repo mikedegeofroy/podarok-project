@@ -109,18 +109,41 @@ function ChildForm({ defaultValues, childRef }) {
 
     const styles = ['bg-black hover:bg-slate-900', 'bg-red-700 hover:bg-red-800', 'bg-green-500']
 
+    let color = "bg-blue-50"
+    let source = "/images/boy.png"
+    if (gender == "F") {
+        color = "bg-pink-50"
+        source = "/images/sonya.png"
+    }
     // Some code for showing the requested present (if there is one)
 
     return (
         <div className="grid grid-cols-2">
             {!editing ? (<div>
-                <div className="w-32 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight mb-6">{childName}</div>
-                <div className="w-max shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight mb-6">{birthday}</div>
-                <div className="flex flex-row mb-6">
-                    <div className="px-4 flex justify-center align-middle border shadow rounded p-2 mr-4">{gender}</div>
+
+                <div className={`text-center rounded-lg p-4 font-['Kuku'] ${color} w-fit`}>
+                    <div className='p-2 grid grid-cols-2 place-items-center w-fit'>
+                        <div className='shadow-lg overflow-hidden h-28 w-28 bg-white rounded-full p-4 object-top'>
+                            <div className='scale-140'>
+                                <Image src={source} height={'278px'} width={'130px'} />
+                            </div>
+                        </div>
+                        <div className="text-left">
+                            <h1>
+                                {/* {childName} */}
+                                Аркадий
+                            </h1>
+                            <h1>
+                                {/* {birthday} */}
+                                9 лет
+                            </h1>
+                        </div>
+                    </div>
                 </div>
-                {defaultValues.status == "avaibable" ? (
-                    <Link href={`/dashboard/${slug}/request`}><div className="w-32 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight mb-3">{defaultValues.status}</div></Link>) : (<div className="w-32 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight mb-3">{defaultValues.status}</div>)}
+
+                {/* <Link href={`/dashboard/${slug}/request`}><div className="w-32 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight mb-3">{defaultValues.status}</div></Link>) : (<div className="w-32 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight mb-3">{defaultValues.status}</div> */}
+
+                {defaultValues.status == "avaibable" ? (<></>) : (<></>)}
                 <button onClick={() => { setEditing(true) }} className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-auto py-2 my-4 px-4 font-['Kuku']">редактировать</button>
             </div>) : (<form onSubmit={onSubmit}>
                 {/* This is the edit form */}
@@ -156,7 +179,7 @@ function ChildForm({ defaultValues, childRef }) {
                 }} className={`${styles[confirmState]} text-white font-bold rounded mx-2 container w-auto py-2 px-4`}>{messages[confirmState]}</button>
             </form>)
             }
-            {defaultValues.requested ? (<ShowRequested gifts={defaultValues.requested} editControls={[editing, setEditing]} childRef={childRef} />) : (<></>)}
+            {defaultValues.requested ? (<ShowRequested gifts={defaultValues.requested} editControls={[editing, setEditing]} childRef={childRef} />) : (<><div key="3" className={`flex justify-center align-middle h-fit w-fit rounded-lg p-4 bg-slate-50 text-2xl`}><div><div className="w-20 h-20"><Image src={'/images/letter.png'} height="316px" width="283px"></Image></div><p className="font-['Kuku'] text-center">Добавить Письмо</p></div></div></>)}
         </div >
     )
 

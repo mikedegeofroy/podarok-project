@@ -23,7 +23,7 @@ export default function Home() {
         </video>
       </div>
       <div className='px-10 py-5'>
-        <h1 className="text-4xl font-medium text-center font-['Kuku']">Участвовать</h1>
+        <h1 className="text-4xl font-medium text-center font-['Kuku']">Помогай другим, чтобы помочь себе.</h1>
         <div className='text-center grid grid-cols-2'>
           <Link href="/send"><a className="text-center p-2 m-5 text-2xl md:text-3xl font-['Kuku']">Послать Поадрок</a></Link>
           <Link href={redirect}><a className="text-center p-2 m-5 text-2xl md:text-3xl font-['Kuku']">Пожелать Подарок</a></Link>
@@ -38,12 +38,12 @@ export default function Home() {
         </div>
       </div>
       {/* About Comic */}
-      <div className='grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-10 py-10'>
-        <h1 className="text-4xl font-medium font-['Kuku'] col-span-1 md:col-span-2 lg:col-span-1">Про наш проект</h1>
-        <div className='col-span-1 p-2 text-md md:text-lg'>
+      <div className='grid place-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-3 px-10 py-10'>
+        <h1 className="text-4xl font-medium font-['Kuku'] col-span-1 md:col-span-2 xl:col-span-1">Про наш проект</h1>
+        <div className="col-span-1 p-2 text-md md:text-lg">
           <div className='grid place-items-center md:m-10'>
-            <p className='md:text-left'>Рребенок, получающий благотворительную помощь, чувствует себя униженным. Для смягчения этого нежелательного социального эффекта платформа позволяет нуждающемуся ребенку выбрать подарок не для себя, а для другого ребенка, оказывая положительное подкрепляющее воздействие на его психику.<br /> <br />
-              Подарки, выбранные из каталога ozon, затем предоставляются для покупки щедрым донорам и распределяются в соответствии с алгоритмом, который учитывает пол, возраст, день рождения и другие факторы для оптимизации распределения.</p>
+            <p className='md:text-left'>Ребенок, получающий помощь, чувствует себя несколько неполноценным. Для смягчения этого нежелательного социального эффекта мы позволяем нуждающемуся ребенку выбрать подарок не для себя, а для другого, оказывая положительное подкрепляющее воздействие на его психику.<br /> <br />
+              Подарки, выбранные из каталога OZON, затем предоставляются для покупки людям с большим сердцем. <span className="font-['Kuku']">*</span> <br /> <br />После покупки товары  распределяются по составленному алгоритму, учитывающему пол, возраст, день рождения, возможные жизненные трудности ребенка и другие факторы.</p>
           </div>
         </div>
         <div className='col-span-1 p-2'>
