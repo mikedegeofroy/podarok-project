@@ -23,7 +23,7 @@ export default function Home() {
         </video>
       </div>
       <div className='px-10 py-5'>
-        <h1 className="text-4xl font-medium text-center font-['Kuku']">Помогай другим, чтобы помочь себе.</h1>
+        <h1 className="text-4xl font-medium text-center font-['Kuku']">Помогай другим, чтобы помочь себе</h1>
         <div className='text-center grid grid-cols-2'>
           <Link href="/send"><a className="text-center p-2 m-5 text-2xl md:text-3xl font-['Kuku']">Послать Поадрок</a></Link>
           <Link href={redirect}><a className="text-center p-2 m-5 text-2xl md:text-3xl font-['Kuku']">Пожелать Подарок</a></Link>

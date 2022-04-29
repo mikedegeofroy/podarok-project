@@ -105,9 +105,9 @@ function ChildForm({ defaultValues, childRef }) {
         }
     }, [confirmState])
 
-    const messages = ['Remove Child', 'Are you sure?', 'Ok.']
+    const messages = ['🗑', 'Вы уверены?', 'Ok.']
 
-    const styles = ['bg-black hover:bg-slate-900', 'bg-red-700 hover:bg-red-800', 'bg-green-500']
+    const styles = ['bg-slate-100 hover:bg-slate-200', 'bg-red-700 hover:bg-red-800', 'bg-green-500']
 
     let color = "bg-blue-50"
     let source = "/images/boy.png"
@@ -130,41 +130,49 @@ function ChildForm({ defaultValues, childRef }) {
                         </div>
                         <div className="text-left">
                             <h1>
-                                {/* {childName} */}
-                                Аркадий
+                                {childName}
                             </h1>
                             <h1>
-                                {/* {birthday} */}
-                                9 лет
+                                {`${new Date().getFullYear() - new Date((Date.parse(birthday))).getFullYear()} лет`}
                             </h1>
+                            {defaultValues.status == "avaibable" ? (<h1>Выбери подарок!</h1>) : (<h1>Подарок выбран</h1>)}
                         </div>
                     </div>
                 </div>
 
-                {/* <Link href={`/dashboard/${slug}/request`}><div className="w-32 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight mb-3">{defaultValues.status}</div></Link>) : (<div className="w-32 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight mb-3">{defaultValues.status}</div> */}
-
-                {defaultValues.status == "avaibable" ? (<></>) : (<></>)}
-                <button onClick={() => { setEditing(true) }} className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-auto py-2 my-4 px-4 font-['Kuku']">редактировать</button>
             </div>) : (<form onSubmit={onSubmit}>
-                {/* This is the edit form */}
-                <input name="username" className="w-32 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6" defaultValue={childName} onChange={(e) => { setChildName(e.target.value) }}></input>
 
-                <h1>{birthday}</h1>
-
-                <Calendar onChange={setChildBirthday} value={new Date(childBirthday)} defaultValue={new Date(2013, 3, 25)} minDetail={'year'} minDate={minDate} maxDate={maxDate}></Calendar>
-
-                <div className="flex flex-row mb-6">
-                    <div onClick={() => { setGender('M') }} className={`${gender == "M" ? "bg-slate-100" : ""} px-4 flex justify-center align-middle border shadow rounded p-2 mr-4 cursor-pointer`}>
-                        M
-                    </div>
-                    <div onClick={() => { setGender('F') }} className={`${gender == "F" ? "bg-slate-100" : ""} px-4 flex justify-center align-middle border shadow rounded p-2 mr-4 cursor-pointer`}>
-                        F
+                <div className={`text-center rounded-lg p-4 font-['Kuku'] ${color} w-fit grid-cols-1`}>
+                    <div className='p-2 grid grid-cols-2 place-items-center w-fit'>
+                        <div className='shadow-lg overflow-hidden h-28 w-28 bg-white rounded-full p-4 object-top'>
+                            <div className='scale-140'>
+                                <Image src={source} height={'278px'} width={'130px'} />
+                            </div>
+                        </div>
+                        <div className="text-left">
+                            <h1>
+                                <input name="username" className="w-32 appearance-none rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1" defaultValue={childName} onChange={(e) => { setChildName(e.target.value) }}></input>
+                            </h1>
+                            <div className="flex flex-row mb-1 text-sm">
+                                <div onClick={() => { setGender('M') }} className={`${gender == "М" ? "bg-slate-100" : "bg-white"} px-4 flex justify-center align-middle rounded p-1 mr-2 cursor-pointer`}>
+                                    М
+                                </div>
+                                <div onClick={() => { setGender('F') }} className={`${gender == "Ж" ? "bg-slate-100" : "bg-white"} px-4 flex justify-center align-middle rounded p-1 mr-2 cursor-pointer`}>
+                                    Ж
+                                </div>
+                            </div>
+                            <h1>
+                                {`${new Date().getFullYear() - new Date((Date.parse(birthday))).getFullYear()} лет`}
+                            </h1>
+                            {defaultValues.status == "avaibable" ? (<h1>Выбери подарок!</h1>) : (<h1>Подарок выбран</h1>)}
+                        </div>
+                        <div className="col-span-2 font-['Roboto'] mt-5">
+                            <Calendar onChange={setChildBirthday} value={new Date(childBirthday)} defaultValue={new Date(2013, 3, 25)} minDetail={'year'} minDate={minDate} maxDate={maxDate}></Calendar>
+                        </div>
                     </div>
                 </div>
 
-                <div className="w-32 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight mb-3">{defaultValues.status}</div>
-
-                <button type="submit" className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-auto py-2 my-4 px-4">Save</button>
+                <button type="submit" className="bg-black hover:bg-slate-900 font-['Kuku'] text-white rounded container w-auto py-2 my-4 px-4">Сохранить</button>
 
                 <button type="button" onClick={async () => {
                     if (confirmState < messages.length - 1) {
@@ -173,13 +181,27 @@ function ChildForm({ defaultValues, childRef }) {
                         setConfirmState(0)
                     }
 
-                    const giftsRef = doc(getFirestore(), 'wishes', defaultValues.requested);
+                    // const giftsRef = doc(getFirestore(), 'wishes', defaultValues.requested);
 
-                    await deleteDoc(giftsRef);
+                    // await deleteDoc(giftsRef);
                 }} className={`${styles[confirmState]} text-white font-bold rounded mx-2 container w-auto py-2 px-4`}>{messages[confirmState]}</button>
             </form>)
             }
-            {defaultValues.requested ? (<ShowRequested gifts={defaultValues.requested} editControls={[editing, setEditing]} childRef={childRef} />) : (<><div key="3" className={`flex justify-center align-middle h-fit w-fit rounded-lg p-4 bg-slate-50 text-2xl`}><div><div className="w-20 h-20"><Image src={'/images/letter.png'} height="316px" width="283px"></Image></div><p className="font-['Kuku'] text-center">Добавить Письмо</p></div></div></>)}
+            {defaultValues.requested ? (<ShowRequested gifts={defaultValues.requested} editControls={[editing, setEditing]} childRef={childRef} />) : (<>
+                <div key="3" className={`flex justify-center align-middle h-fit w-fit rounded-lg p-4 bg-slate-50 text-2xl`}
+                >
+                    <Link href={`/dashboard/${slug}/request`}>
+                        <div className="grid place-items-center cursor-pointer">
+                            <div className="w-20 h-20 mb-3"><Image src={'/images/letter.png'} height="316px" width="283px">
+                            </Image>
+                            </div>
+                            <p className="font-['Kuku'] text-center">Добавить Письмо</p>
+                        </div>
+                    </Link>
+                </div>
+            </>)}
+
+            <button onClick={() => { setEditing(true) }} className={`bg-black hover:bg-slate-900 text-white font-bold rounded container w-fit py-2 my-4 px-4 font-['Kuku']  ${editing ? ("hidden") : ("")}`}>редактировать</button>
         </div >
     )
 
@@ -207,7 +229,7 @@ function ShowRequested({ gifts, childRef, editControls }) {
     }
 
     return (gift ? (
-        <div className="select-none shadow rounded-lg p-4 w-max h-max">
+        <div className="select-none bg-slate-50 rounded-lg p-4 w-max h-max">
             {editControls[0] && <button onClick={() => removeRequest()}>X</button>}
             <img src={gift.image} />
             {/* <img src={gift.letter} /> */}
