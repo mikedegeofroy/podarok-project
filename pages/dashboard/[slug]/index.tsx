@@ -118,7 +118,7 @@ function ChildForm({ defaultValues, childRef }) {
     // Some code for showing the requested present (if there is one)
 
     return (
-        <div className="grid grid-cols-2">
+        <div className="grid sm:grid-cols-2 grid-cols-1">
             {!editing ? (<div>
 
                 <div className={`text-center rounded-lg p-4 font-['Kuku'] ${color} w-fit`}>

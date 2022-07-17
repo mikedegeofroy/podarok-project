@@ -23,16 +23,16 @@ export default function Layout({children}){
                 <div className="float-left">
                     <Image src={'/images/fox.png'} height={'80px'} width={'80px'}/>
                 </div>
-                <div className="float-right">
+                {/* <div className="float-right">
                     <h1 className="text-xl text-right">В сотрудничестве с</h1>
                     <div className="flex flex-row">
                         <div className='grid place-items-center m-2'>
                             <Image src={'/icons/ozon.png'} height={'30px'} width={'130px'}/>
                         </div>
-                        {/* <h1 className="text-3xl pr-2 pl-1">+</h1>
-                        <Image src={'/lego.png'} height={'50px'} width={'50px'}/> */}
+                        <h1 className="text-3xl pr-2 pl-1">+</h1>
+                        <Image src={'/lego.png'} height={'50px'} width={'50px'}/>
                     </div>
-                </div>
+                </div> */}
             </footer>
         </>
     )

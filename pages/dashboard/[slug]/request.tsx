@@ -105,10 +105,11 @@ function GiftSelector({ child, childRef }) {
     };
 
     return gifts && !formVis ? (
-        <div>
+        <div className="font-['Kuku']">
+            <h1 className="text-center text-4xl pt-5">Выбери подарок другому ребенку</h1>
             <button className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-auto py-2 my-4 px-4 z-10" onClick={() => {
                 router.push(`/dashboard/${child.slug}`)
-            }}>Back</button>
+            }}>{"< Назад"}</button>
             <div className="grid gap-4 grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-5 mb-6">
                 {gifts.map(({ image }, index) => {
                     return (
@@ -125,7 +126,7 @@ function GiftSelector({ child, childRef }) {
                                 <img src={image} />
                                 {selected.includes(index) && (<button className="bg-black hover:bg-slate-900 text-white font-bold rounded container w-auto py-2 my-4 px-4 z-10" onClick={() => {
                                     setFormVis(true)
-                                }}>Select</button>)}
+                                }}>Выбрать</button>)}
                             </div>
                         </div>
                     )
@@ -133,11 +134,11 @@ function GiftSelector({ child, childRef }) {
             </div>
         </div>
         // Some logic to upload a image, on send, we add a value to the whishes, not verified, gift data, image url
-    ) : formVis ? (<div>
-        <h1 className="text-center text-4xl">Now you have to upload a photo of the letter so it can be shown.</h1>
+    ) : formVis ? (<div className="font-['Kuku']">
+        <h1 className="text-center text-4xl pt-5">Прикрепи фотографию своего письма *</h1>
         <button className='bg-black hover:bg-slate-900 text-white font-bold rounded container py-2 my-4 px-4 z-10 w-max cursor-pointer' onClick={ () => {
             setFormVis(false)
-        }}>Back</button>
+        }}>{"< Назад"}</button>
         <div className="grid place-items-center min-h-[70vh]">
             <div>
                 <div>
@@ -180,7 +181,7 @@ function GiftSelector({ child, childRef }) {
                     })
                     // Check if image is uploaded and add as a unverified wish, that I can then display in the admin tab, maybe even send me a email
                     // If things go to shit, i'll make a bot to send out orders to buy presents. 
-                }}>Save</button>
+                }}>Сохранить</button>
             </div>
         </div>
     </div>

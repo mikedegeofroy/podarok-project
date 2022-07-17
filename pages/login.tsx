@@ -27,7 +27,7 @@ export default function Login() {
                         </div>
                         {/* <p>Not a user? <Link href="/register"><a className='text-gray-600' >Register</a></Link></p> */}
                         <Link href="/register"><button className='block sm:hidden bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded container mx-auto my-4'>
-                            Register
+                            Регистрация
                         </button></Link>
                     </div>
                     <div className='hidden sm:block'>
