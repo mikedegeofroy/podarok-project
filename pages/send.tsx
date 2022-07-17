@@ -25,13 +25,21 @@ function GiftSelector(props) {
 
     let giftsArray = props.gifts.map((element, index) => {
         return (
-            <div className={!selectedGifts.includes(index) ? "select-none shadow rounded-lg p-4 h-min w-fit" : "select-none shadow-xl rounded-lg p-4 h-min w-fit"} key={index}>
-                <img src={element.letter} alt="" />
+            // <div className={!selectedGifts.includes(index) ? "select-none shadow rounded-lg p-4 h-min w-fit" : "select-none shadow-xl rounded-lg p-4 h-min w-fit"} key={index}>
+            //     <img src={element.letter} alt="" />
+            // </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2" key={index}>
+                <div>
+                    <img src={element.letter} alt="" />
+                </div>
+                <div>
+                    <img src={element.image} alt="" />
+                </div>
             </div>
         )
     })
 
-    console.log(giftsArray, showGift)
+    console.log(props.gifts, showGift)
 
     const removeSelectedGift = (e) => {
         let name = e
@@ -52,7 +60,11 @@ function GiftSelector(props) {
                         setShowGift(giftsArray.length - 1)
                     }
                 }}>{"<"}</button>
-                <div className="w-[30%] flex justify-center">
+                <div className="w-[40%] flex justify-center font-['Roboto']">
+                    {props.gifts[showGift].name}
+                    {`, ${new Date().getFullYear() - new Date((Date.parse(props.gifts[showGift].age))).getFullYear()}`}
+                </div>
+                {/* <div className="w-[30%] flex justify-center">
                     <button onClick={() => {
                         if (!selectedGifts.includes(showGift)) {
                             setSelectedGifts(oldArray => [...oldArray, showGift])
@@ -60,7 +72,7 @@ function GiftSelector(props) {
                             removeSelectedGift(showGift)
                         }
                     }}>{!selectedGifts.includes(showGift) ? ("Выбрать") : ("Выбранно")}</button>
-                </div>
+                </div> */}
                 <button onClick={() => {
                     if (showGift + 1 <= giftsArray.length - 1) {
                         setShowGift(showGift + 1)
@@ -72,6 +84,9 @@ function GiftSelector(props) {
             <div className="grid">
                 {giftsArray[showGift]}
             </div>
+            <h1>
+                Buy
+            </h1>
         </div>
     )
 
